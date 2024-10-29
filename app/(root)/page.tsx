@@ -1,10 +1,30 @@
-import { Button } from '@/components/ui/button';
+import HeaderBox from '@/components/headerBox';
+import TotalBalanceBox from '@/components/totalBalanceBox';
 
 export default function Home() {
+  const loggedIn = {
+    firstName: 'Mohamed ',
+  };
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen py-2 space-y-4'>
-      <h1 className='text-5xl font-bold text-center uppercase'> Dashboard</h1>
-      <Button variant='outline'> Get started</Button>
-    </div>
+    <section id='home' className='home '>
+      <div className='home-content'>
+        <header className='home-header'>
+          {/* welcome message  */}
+          <HeaderBox
+            type='greeting'
+            title='Welcome'
+            user={loggedIn?.firstName || 'Guest'}
+            subtext='Access and manage your account and transactions efficiently.'
+          />
+
+          {/*  balance in account  */}
+          <TotalBalanceBox
+            accounts={[]}
+            totalBanks={1}
+            totalCurrentBalance={1411.5}
+          />
+        </header>
+      </div>
+    </section>
   );
 }

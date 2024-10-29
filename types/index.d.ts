@@ -148,6 +148,7 @@ declare interface BankInfoProps {
   type: 'full' | 'card';
 }
 
+// header props
 declare interface HeaderBoxProps {
   type?: 'title' | 'greeting';
   title: string;
@@ -202,7 +203,7 @@ declare interface BankTabItemProps {
   appwriteItemId?: string;
 }
 
-declare interface TotlaBalanceBoxProps {
+declare interface TotalBalanceBoxProps {
   accounts: Account[];
   totalBanks: number;
   totalCurrentBalance: number;
@@ -218,7 +219,7 @@ declare interface RightSidebarProps {
   banks: Bank[] & Account[];
 }
 
-declare interface SiderbarProps {
+declare interface SideBarProps {
   user: User;
 }
 
