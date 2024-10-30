@@ -43,6 +43,7 @@
   background: #7878a3;
 }
 
+/*  */
 @layer utilities {
   .input-class {
     @apply text-16 placeholder:text-16 rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-500;
@@ -167,11 +168,11 @@
   }
 
   .profile-img {
-    @apply flex-center absolute -top-8 size-24 rounded-full bg-gray-100 border-8 border-white p-2 shadow-profile;
+    @apply flex-center absolute top-20 size-24 rounded-full bg-gray-100 border-8 border-white p-2 shadow-profile;
   }
 
   .profile-details {
-    @apply flex flex-col pt-24;
+    @apply flex flex-col pt-48;
   }
 
   .profile-name {
@@ -183,7 +184,7 @@
   }
 
   .banks {
-    @apply flex flex-col justify-between gap-8 px-6 py-8;
+    @apply flex flex-col justify-between gap-8 px-6 pb-8 pt-32;
   }
 
   /* My Banks */
@@ -225,12 +226,12 @@
     @apply relative flex h-[190px] w-full max-w-[320px] justify-between rounded-[20px] border border-white bg-bank-gradient shadow-creditCard backdrop-blur-[6px];
   }
 
-  .bank-card_content {
+  .bank-card-content {
     @apply relative z-10 flex size-full max-w-[228px] flex-col justify-between rounded-l-[20px] bg-gray-700 bg-bank-gradient px-5 pb-4 pt-5;
   }
 
-  .bank-card_icon {
-    @apply flex size-full flex-1 flex-col items-end justify-between rounded-r-[20px] bg-bank-gradient bg-cover bg-center bg-no-repeat py-5 pr-5;
+  .bank-card-icon {
+    @apply flex size-full flex-1 flex-col items-end justify-between rounded-r-[20px] bg-bank-gradient bg-cover bg-center bg-no-repeat py-5 px-5;
   }
 
   /* Bank Info */

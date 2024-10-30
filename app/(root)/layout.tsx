@@ -1,4 +1,5 @@
-import SideBar from '@/components/sections/sideBar';
+import MobileSidebar from '@/components/navigations/mobileNavBar';
+import SideBar from '@/components/navigations/sideBar';
 
 export default function RootLayout({
   children,
@@ -14,8 +15,13 @@ export default function RootLayout({
     <main className='flex h-screen w-full font-inter '>
       {/* sidebar */}
       <SideBar user={loggedIn} />
-      {/* main content */}
-      {children}
+      <div className='flex size-full flex-col'>
+        {/* mobile sidebar */}
+        <MobileSidebar user={loggedIn} />
+
+        {/* main content */}
+        {children}
+      </div>
     </main>
   );
 }

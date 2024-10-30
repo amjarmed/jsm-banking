@@ -3,6 +3,16 @@ import { type ClassValue, clsx } from 'clsx';
 import qs from 'query-string';
 import { twMerge } from 'tailwind-merge';
 
+/**
+ * Combines and merges class names.
+ *
+ * This function takes multiple class values, processes them using `clsx` to handle conditional
+ * class names and arrays, and then merges the resulting class string with Tailwind CSS classes
+ * using `twMerge` to ensure that any conflicting Tailwind CSS classes are resolved.
+ *
+ * @param inputs - An array of class values that can be strings, arrays, or objects.
+ * @returns A single string of merged and deduplicated class names.
+ */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -129,6 +139,7 @@ export function getAccountTypeColors(type: AccountTypes) {
   }
 }
 
+/*
 export function countTransactionCategories(
   transactions: Transaction[],
 ): CategoryCount[] {
@@ -167,6 +178,7 @@ export function countTransactionCategories(
 
   return aggregatedCategories;
 }
+*/
 
 export function extractCustomerIdFromUrl(url: string) {
   // Split the URL string by '/'
