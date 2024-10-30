@@ -2,6 +2,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import qs from 'query-string';
 import { twMerge } from 'tailwind-merge';
+import { z } from 'zod';
 
 /**
  * Combines and merges class names.
@@ -205,3 +206,50 @@ export const getTransactionStatus = (date: Date) => {
 
   return date > twoDaysAgo ? 'Processing' : 'Success';
 };
+
+// auth formSchema
+// zod inputs validation
+export const AuthFormSchema = (type: string) =>
+  z.object({
+    // for signup
+    firstName:
+      type === 'sign-in'
+        ? z.string().optional()
+        : z
+            .string()
+            .min(2, { message: 'First name must be at least 2 characters' }),
+    lastName: z
+      .string()
+      .min(2, { message: 'Last name must be at least 2 characters' }),
+    address1:
+      type === 'sign-in'
+        ? z.string().optional()
+        : z
+            .string()
+            .min(2, { message: 'Address must be at least 2 characters' }),
+    state:
+      type === 'sign-in'
+        ? z.string().optional()
+        : z.string().min(2, { message: 'State must be at least 2 characters' }),
+    postalCode:
+      type === 'sign-in'
+        ? z.string().optional()
+        : z
+            .string()
+            .min(2, { message: 'Postal code must be at least 2 characters' }),
+    dateOfBirth:
+      type === 'sign-in'
+        ? z.string().optional()
+        : z
+            .string()
+            .min(2, { message: 'Date of birth must be at least 2 characters' }),
+    ssn:
+      type === 'sign-in'
+        ? z.string().optional()
+        : z.string().min(2, { message: 'SSN must be at least 2 characters' }),
+    // for both login and signup
+    email: z.string().email({ message: 'Invalid email' }),
+    password: z
+      .string()
+      .min(6, { message: 'Password must be at least 6 characters' }),
+  });

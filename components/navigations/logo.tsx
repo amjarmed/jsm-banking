@@ -1,23 +1,27 @@
 import Image from 'next/image';
 import Link from 'next/link';
-
+export interface LogoProps {
+  isTitle?: boolean;
+  styleTitle?: string;
+  styleLink?: string;
+  styleImage?: string;
+  imageSize?: number;
+  isCenter?: boolean;
+}
 const Logo = ({
   isTitle = true,
   styleTitle = '',
   styleLink = 'mb-0',
   styleImage = 'size-[24px] max-xl:size-14',
   imageSize = 24,
-}: {
-  isTitle?: boolean;
-  styleTitle?: string;
-  styleLink?: string;
-  styleImage?: string;
-  imageSize?: number;
-}) => {
+  isCenter = false,
+}: LogoProps) => {
   return (
     <Link
       href='/'
-      className={` cursor-pointer flex items-center gap-2 ${styleLink}`}
+      className={` cursor-pointer flex items-center gap-2 ${styleLink}${
+        isCenter ? ' justify-center' : ''
+      }`}
     >
       <Image
         src='/icons/logo.svg'
