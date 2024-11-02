@@ -86,7 +86,8 @@ export function formatAmount(amount: number): string {
   return formatter.format(amount);
 }
 
-export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value));
+export const parseStringify = (value: unknown) =>
+  JSON.parse(JSON.stringify(value));
 
 export const removeSpecialCharacters = (value: string) => {
   return value.replace(/[^\w\s]/gi, '');
@@ -212,44 +213,15 @@ export const getTransactionStatus = (date: Date) => {
 export const AuthFormSchema = (type: string) =>
   z.object({
     // for signup
-    firstName:
-      type === 'sign-in'
-        ? z.string().optional()
-        : z
-            .string()
-            .min(2, { message: 'First name must be at least 2 characters' }),
-    lastName: z
-      .string()
-      .min(2, { message: 'Last name must be at least 2 characters' }),
-    address1:
-      type === 'sign-in'
-        ? z.string().optional()
-        : z
-            .string()
-            .min(2, { message: 'Address must be at least 2 characters' }),
-    state:
-      type === 'sign-in'
-        ? z.string().optional()
-        : z.string().min(2, { message: 'State must be at least 2 characters' }),
-    postalCode:
-      type === 'sign-in'
-        ? z.string().optional()
-        : z
-            .string()
-            .min(2, { message: 'Postal code must be at least 2 characters' }),
-    dateOfBirth:
-      type === 'sign-in'
-        ? z.string().optional()
-        : z
-            .string()
-            .min(2, { message: 'Date of birth must be at least 2 characters' }),
-    ssn:
-      type === 'sign-in'
-        ? z.string().optional()
-        : z.string().min(2, { message: 'SSN must be at least 2 characters' }),
+    firstName: type === 'sign-in' ? z.string().optional() : z.string().min(2),
+    lastName: type === 'sign-in' ? z.string().optional() : z.string().min(2),
+    address1: type === 'sign-in' ? z.string().optional() : z.string().min(2),
+    state: type === 'sign-in' ? z.string().optional() : z.string().min(2),
+    city: type === 'sign-in' ? z.string().optional() : z.string().min(2),
+    postalCode: type === 'sign-in' ? z.string().optional() : z.string().min(2),
+    dateOfBirth: type === 'sign-in' ? z.string().optional() : z.string().min(2),
+    ssn: type === 'sign-in' ? z.string().optional() : z.string().min(2),
     // for both login and signup
     email: z.string().email({ message: 'Invalid email' }),
-    password: z
-      .string()
-      .min(6, { message: 'Password must be at least 6 characters' }),
+    password: z.string().min(8),
   });

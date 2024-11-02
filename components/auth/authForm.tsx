@@ -1,45 +1,68 @@
 'use client';
+import { signIn, signUp } from '@/app/services/actions/user.actions';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
+import { useToast } from '@/hooks/use-toast';
 import { AuthFormSchema } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import Logo from '../navigations/logo';
 import CustomInput from './customInput';
 
 // the AuthForm component for sing-in and sing-up
+
 const AuthForm = ({ type }: { type: string }) => {
-  const formSchema = AuthFormSchema(type);
-  const [user, setUser] = useState(null);
+  // toast
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  // 1. Define your form.
-  //  useFormProps<z.infer<typeof formSchema>>
+  const { toast } = useToast();
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const formSchema = AuthFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
   });
 
   // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     setIsLoading(true);
     try {
-      // console.log(values);
-      // sign Up with Appwrite & create plain link token
+      //============== sign Up
+      if (type === 'sign-up') {
+        const newUser = await signUp(values);
+        setLoggedInUser(newUser);
+
+        if (newUser) router.push('/');
+      }
+
+      //================= sign In
+      if (type === 'sign-in') {
+        const response = await signIn({
+          email: values.email,
+          password: values.password,
+        });
+
+        if (response) router.push('/');
+      }
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
     }
   };
+
+  //  Toasts usage
+  useEffect(() => {
+    if (loggedInUser) {
+      toast({
+        description: 'Sign Up  success ',
+      });
+    }
+  }, []);
 
   return (
     <section className='auth-form '>
@@ -51,19 +74,23 @@ const AuthForm = ({ type }: { type: string }) => {
           styleTitle='text-26 font-imb-plex-serif font-bold text-black-1'
           isCenter
         />
-        <div className='flex flex-col gap-1 md:gap-3 '>
-          <h1 className='text-24  lg:text-36 font-semibold text-gray-900'>
-            {user ? 'Link Account' : type === 'sign-in' ? 'Sign In' : 'Sign Up'}
+        <div className='flex flex-col gap-1 md:gap-3  text-center'>
+          <h1 className='text-24  lg:text-36 font-semibold text-gray-900 '>
+            {loggedInUser
+              ? 'link Account'
+              : type === 'sign-in'
+              ? 'Sign In'
+              : 'Sign Up'}
           </h1>
           <p className='text-16 font-normal to-gray-600'>
-            {user
+            {loggedInUser
               ? 'Link your account to get started'
               : 'Please enter your details'}
           </p>
         </div>
       </header>
       {/* check for user  */}
-      {user ? (
+      {loggedInUser ? (
         <div className='flex flex-col gap-4'>{/* PlaidLink */}</div>
       ) : (
         <>
@@ -88,10 +115,11 @@ const AuthForm = ({ type }: { type: string }) => {
                   </div>
                   <CustomInput
                     control={form.control}
-                    name='address1'
-                    placeholder='enter your specific address'
-                    label='Address'
+                    name='city'
+                    placeholder='ex: New York'
+                    label='City'
                   />
+
                   <div className='flex gap-4'>
                     <CustomInput
                       control={form.control}
@@ -106,6 +134,12 @@ const AuthForm = ({ type }: { type: string }) => {
                       label='Postal Code'
                     />
                   </div>
+                  <CustomInput
+                    control={form.control}
+                    name='address1'
+                    placeholder='enter your specific address'
+                    label='Address'
+                  />
                   <div className='flex gap-4'>
                     <CustomInput
                       control={form.control}

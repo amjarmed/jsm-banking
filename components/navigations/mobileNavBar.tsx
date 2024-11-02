@@ -12,6 +12,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from './logo';
+import SideBarFooter from './sideBarFooter';
 const MobileNavBar = ({ user }: MobileNavProps) => {
   const pathname = usePathname();
 
@@ -80,7 +81,7 @@ const MobileNavBar = ({ user }: MobileNavProps) => {
                   </nav>
                 </SheetClose>
                 {/* TODO:FOOTER */}
-                FOOTER
+                <SideBarFooter user={user} type='mobile' />
               </div>
             </div>
           </SheetContent>

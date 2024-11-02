@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/toaster';
 import type { Metadata } from 'next';
 import { IBM_Plex_Serif, Inter } from 'next/font/google';
 import './globals.css';
@@ -26,11 +27,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='en' className='min-w-[320px] min-h-screen'>
       <body
         className={`${inter.variable} ${imbPlexSerif.variable} antialiased`}
       >
         {children}
+
+        <Toaster />
       </body>
     </html>
   );

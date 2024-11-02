@@ -1,25 +1,12 @@
 import HeaderBox from '@/components/headerBox';
 import RightSideBar from '@/components/navigations/rightSideBar';
 import TotalBalanceBox from '@/components/totalBalanceBox';
+import { getLoggedInUser } from '../services/actions/user.actions';
 
-export default function Home() {
-  const loggedIn: User = {
-    $id: '632e75c2e6f7e45f90a7',
-    email: 'test@gmail.com',
-    userId: '632e75c2e6f7e45f90a7',
-    dwollaCustomerUrl:
-      'https://api-sandbox.dwolla.com/customers/632e75c2e6f7e45f90a7',
-    dwollaCustomerId: '632e75c2e6f7e45f90a7',
-    firstName: 'Mohamed',
-    lastName: 'Amjar',
-    address1: '123 Main St',
-    city: 'New York',
-    state: 'NY',
-    postalCode: '10001',
-    dateOfBirth: '1990-01-01',
-    ssn: '123-45-6789',
-  };
+export default async function Home() {
+  const loggedIn = await getLoggedInUser();
 
+  //if (!user) redirect('/sign-in');
   return (
     <section id='home' className='home '>
       <div className='home-content'>
@@ -28,7 +15,7 @@ export default function Home() {
           <HeaderBox
             type='greeting'
             title='Welcome'
-            user={loggedIn?.firstName || 'Guest'}
+            user={loggedIn?.name || 'Guest'}
             subtext='Access and manage your account and transactions efficiently.'
           />
 

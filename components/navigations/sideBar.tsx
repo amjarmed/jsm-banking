@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from './logo';
+import SideBarFooter from './sideBarFooter';
 
 function SideBar({ user }: SideBarProps) {
   const pathname = usePathname();
@@ -50,7 +51,7 @@ function SideBar({ user }: SideBarProps) {
         <p className='text-neutral-200'>USER PROFILE</p>
       </nav>
       {/* sidebar  footer */}
-      <p className='text-neutral-200'> SIDEBAR FOOTER</p>
+      <SideBarFooter user={user} type='desktop' />
     </section>
   );
 }
