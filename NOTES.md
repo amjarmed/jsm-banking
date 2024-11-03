@@ -19,7 +19,8 @@ day-2 :01:03:00 minutes
 day-3 :02:34:14 minutes
 day-4 : 03:05:55 minutes
 day-5 : 03:16:30 minutes
-day-6 : 3:37:01 minutes
+day-6 : 03:37:01 minutes
+day-7 : 00:00:00 minutes
 
 ---
 
@@ -53,6 +54,7 @@ day-6 : 3:37:01 minutes
 - 5 hour to figure that i need to use "use server " and session not created because of 2 chars made differences :)
 - follow debug steps (variables...etc)
 - `sentry` for error reporting, Code breaks, fix it faster
+- integration with PLAID : banking system
 
 ## notes from outside the tutorial
 

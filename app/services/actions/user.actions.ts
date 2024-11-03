@@ -4,7 +4,13 @@ import { parseStringify } from '@/lib/utils';
 import { cookies } from 'next/headers';
 import { ID } from 'node-appwrite';
 
-//================== sign up user =================
+/**
+ * Signs up a new user, creates a session, and sets the session cookie
+ *
+ * @param userData - User data to sign up with
+ * @returns The newly created user document
+ */
+
 export const signUp = async (userData: SignUpParams) => {
   const { email, password, firstName, lastName } = userData;
   try {
@@ -33,7 +39,12 @@ export const signUp = async (userData: SignUpParams) => {
   }
 };
 
-//==================== sign in user =================
+/**
+ * Signs in a user and creates a session, setting the session cookie
+ *
+ * @param data - Data to sign in with
+ * @returns The newly created session document
+ */
 export const signIn = async ({ email, password }: LoginUser) => {
   try {
     // create user account
@@ -46,30 +57,33 @@ export const signIn = async ({ email, password }: LoginUser) => {
       secure: true,
     });
     console.log(`logged in successfully !`);
-    console.log(parseStringify(response));
-
     return parseStringify(response);
   } catch (error) {
     console.log('login error: ', error);
   }
 };
 
-// ... your initilization functions
+/**
+ * Retrieves the logged-in user document
+ *
+ * @returns The logged-in user document
+ */
 
 export async function getLoggedInUser() {
   try {
     const { account } = await createSessionClient();
     const user = await account.get();
-
-    console.log('user: ', parseStringify(user));
     return parseStringify(user);
   } catch (error) {
     console.log(error);
   }
 }
 
-//  SING OUT USER
-
+/**
+ * Deletes the current user session and removes the session cookie
+ *
+ * @returns undefined
+ */
 export async function signOut() {
   try {
     const { account } = await createSessionClient();

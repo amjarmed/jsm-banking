@@ -3,6 +3,18 @@
 import { cookies } from 'next/headers';
 import { Account, Client, Databases, Users } from 'node-appwrite';
 
+/**
+ * Creates a session client for interacting with Appwrite services.
+ *
+ * This function initializes a new Appwrite Client instance with the endpoint and project ID
+ * specified in environment variables. It retrieves the 'appwrite-session' cookie to set the
+ * session on the client. If no session is found, it throws an error.
+ *
+ * @throws {Error} Throws an error if the session cookie is not found.
+ *
+ * @returns {Object} An object containing the `account` getter, which provides access to
+ * Appwrite's Account service using the configured session client.
+ */
 export async function createSessionClient() {
   const client = new Client()
     .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
@@ -23,6 +35,14 @@ export async function createSessionClient() {
   };
 }
 
+/**
+ * Creates an Appwrite client for the admin role. This client is used to perform
+ * operations that require admin privileges, such as creating a user or database.
+ *
+ * @returns An object with three properties: `account`, `user`, and `database`.
+ * Each property is an instance of the corresponding Appwrite service class.
+ * @throws If the `NEXT_APPWRITE_KEY` environment variable is not set.
+ */
 export async function createAdminClient() {
   const client = new Client()
     .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)

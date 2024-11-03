@@ -16,8 +16,26 @@ import CustomInput from './customInput';
 
 // the AuthForm component for sing-in and sing-up
 
+/**
+ * AuthForm component handles the authentication form for sign-in and sign-up.
+ *
+ * This component dynamically renders the appropriate form fields based on the
+ * type of authentication ('sign-in' or 'sign-up'). It manages form submission
+ * and state updates for loading and logged-in user status. The form uses a
+ * schema for validation and displays toast notifications on successful sign-up and sign-in.
+ *
+ * Props:
+ * @param type - A string indicating the type of authentication form ('sign-in' or 'sign-up').
+ *
+ * State:
+ * @param isLoading - A boolean state indicating the loading status during form submission.
+ * @param loggedInUser - A state to hold the logged-in user's information after successful sign-up/sign-in.
+ *
+ * Hooks:
+ * Uses `useRouter` for navigation, `useToast` for showing toast notifications,
+ * and `useForm` from react-hook-form for form handling and validation.
+ */
 const AuthForm = ({ type }: { type: string }) => {
-  // toast
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -27,11 +45,21 @@ const AuthForm = ({ type }: { type: string }) => {
     resolver: zodResolver(formSchema),
   });
 
-  // 2. Define a submit handler.
+  /**
+   * Handles form submission for authentication.
+   *
+   * Depending on the form type, either signs up a new user or signs in an existing user.
+   * Updates the loading state during the process.
+   * On successful sign-up, sets the logged-in user state and redirects to the home page.
+   * On successful sign-in, redirects to the home page.
+   * Logs any errors encountered during the process.
+   *
+   * @param values - The form values matching the authentication schema.
+   */
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     try {
-      //============== sign Up
+      //============== sign Up ======
       if (type === 'sign-up') {
         const newUser = await signUp(values);
         setLoggedInUser(newUser);
@@ -39,7 +67,7 @@ const AuthForm = ({ type }: { type: string }) => {
         if (newUser) router.push('/');
       }
 
-      //================= sign In
+      //================= sign In ======
       if (type === 'sign-in') {
         const response = await signIn({
           email: values.email,
@@ -55,7 +83,8 @@ const AuthForm = ({ type }: { type: string }) => {
     }
   };
 
-  //  Toasts usage
+  //====== Toasts usage =====
+
   useEffect(() => {
     if (loggedInUser) {
       toast({
