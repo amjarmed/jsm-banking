@@ -3,6 +3,11 @@
 import { cookies } from 'next/headers';
 import { Account, Client, Databases, Users } from 'node-appwrite';
 
+const {
+  NEXT_PUBLIC_APPWRITE_ENDPOINT: APPWRITE_ENDPOINT,
+  NEXT_PUBLIC_APPWRITE_PROJECT_ID: APPWRITE_PROJECT_ID,
+  NEXT_APPWRITE_KEY: APPWRITE_KEY,
+} = process.env;
 /**
  * Creates a session client for interacting with Appwrite services.
  *
@@ -17,8 +22,8 @@ import { Account, Client, Databases, Users } from 'node-appwrite';
  */
 export async function createSessionClient() {
   const client = new Client()
-    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
-    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
+    .setEndpoint(APPWRITE_ENDPOINT!)
+    .setProject(APPWRITE_PROJECT_ID!);
 
   const cookieStore = await cookies();
   const session = cookieStore.get('appwrite-session');
@@ -45,13 +50,9 @@ export async function createSessionClient() {
  */
 export async function createAdminClient() {
   const client = new Client()
-    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
-    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!)
-    .setKey(process.env.NEXT_APPWRITE_KEY!);
-
-  // check if session exists
-  if (client) {
-  }
+    .setEndpoint(APPWRITE_ENDPOINT!)
+    .setProject(APPWRITE_PROJECT_ID!)
+    .setKey(APPWRITE_KEY!);
 
   return {
     get account() {

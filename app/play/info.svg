@@ -1,0 +1,10 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
+    fill="currentColor"
+>
+    <circle cx="12" cy="12" r="10" stroke="#e7e7e7" stroke-width="2" fill="#dfe1e1" />
+    <text x="12" y="16" font-size="12" text-anchor="middle" fill="#000000">!</text>
+</svg>

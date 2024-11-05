@@ -1,7 +1,7 @@
 import HeaderBox from '@/components/headerBox';
 import RightSideBar from '@/components/navigations/rightSideBar';
 import TotalBalanceBox from '@/components/totalBalanceBox';
-import { getLoggedInUser } from '../services/actions/user.actions';
+import { getLoggedInUser } from '../services/actions/user.auth';
 
 export default async function Home() {
   const loggedIn = await getLoggedInUser();

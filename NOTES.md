@@ -20,7 +20,7 @@ day-3 :02:34:14 minutes
 day-4 : 03:05:55 minutes
 day-5 : 03:16:30 minutes
 day-6 : 03:37:01 minutes
-day-7 : 00:00:00 minutes
+day-7 : 04:02:00 minutes
 
 ---
 
@@ -54,7 +54,10 @@ day-7 : 00:00:00 minutes
 - 5 hour to figure that i need to use "use server " and session not created because of 2 chars made differences :)
 - follow debug steps (variables...etc)
 - `sentry` for error reporting, Code breaks, fix it faster
-- integration with PLAID : banking system
+- integration with PLAID : banking system, middle man between apps and banks , its help us to connect securely, give us a sample way to connect our apps to thousand deferent banks securely (we dont have to handle sanative stuff).
+- using dwolla as payment processor
+- making your function atomic
+- using pino for logging
 
 ## notes from outside the tutorial
 

@@ -1,4 +1,4 @@
-import { signOut } from '@/app/services/actions/user.actions';
+import { signOut } from '@/app/services/actions/user.auth';
 import { LogOutIcon } from 'lucide-react';
 import { redirect } from 'next/navigation';
 

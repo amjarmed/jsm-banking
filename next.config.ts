@@ -19,6 +19,19 @@ const nextConfig: NextConfig = {
     ],
   },
   serverExternalPackages: ['import-in-the-middle'],
+  experimental: {
+    turbo: {
+      resolveExtensions: [
+        '.mdx',
+        '.tsx',
+        '.ts',
+        '.jsx',
+        '.js',
+        '.mjs',
+        '.json',
+      ],
+    },
+  },
 };
 
 export default withSentryConfig(

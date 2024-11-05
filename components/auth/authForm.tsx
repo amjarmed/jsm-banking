@@ -1,5 +1,5 @@
 'use client';
-import { signIn, signUp } from '@/app/services/actions/user.actions';
+import { signIn, signUp } from '@/app/services/actions/user.auth';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import PlaidLink from '../banks/plaid-link';
 import Logo from '../navigations/logo';
 import CustomInput from './customInput';
 
@@ -35,6 +36,7 @@ import CustomInput from './customInput';
  * Uses `useRouter` for navigation, `useToast` for showing toast notifications,
  * and `useForm` from react-hook-form for form handling and validation.
  */
+
 const AuthForm = ({ type }: { type: string }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -61,7 +63,19 @@ const AuthForm = ({ type }: { type: string }) => {
     try {
       //============== sign Up ======
       if (type === 'sign-up') {
-        const newUser = await signUp(values);
+        const userData = {
+          firstName: values.firstName!,
+          lastName: values.lastName!,
+          email: values.email,
+          password: values.password,
+          address1: values.address1!,
+          city: values.city!,
+          state: values.state!,
+          postalCode: values.postalCode!,
+          dateOfBirth: values.dateOfBirth!,
+          ssn: values.ssn!,
+        };
+        const newUser = await signUp(userData);
         setLoggedInUser(newUser);
 
         if (newUser) router.push('/');
@@ -77,7 +91,7 @@ const AuthForm = ({ type }: { type: string }) => {
         if (response) router.push('/');
       }
     } catch (error) {
-      console.log(error);
+      console.log('AuthForm error: ', { error });
     } finally {
       setIsLoading(false);
     }
@@ -120,7 +134,9 @@ const AuthForm = ({ type }: { type: string }) => {
       </header>
       {/* check for user  */}
       {loggedInUser ? (
-        <div className='flex flex-col gap-4'>{/* PlaidLink */}</div>
+        <div className='flex flex-col gap-4'>
+          <PlaidLink user={loggedInUser!} variant='primary' />
+        </div>
       ) : (
         <>
           <Form {...form}>
@@ -134,12 +150,14 @@ const AuthForm = ({ type }: { type: string }) => {
                       name='firstName'
                       placeholder='ex:john'
                       label='First Name'
+                      inputType='text'
                     />
                     <CustomInput
                       control={form.control}
                       name='lastName'
                       placeholder='ex: Doe'
                       label='Last Name'
+                      inputType='text'
                     />
                   </div>
                   <CustomInput
@@ -147,6 +165,7 @@ const AuthForm = ({ type }: { type: string }) => {
                     name='city'
                     placeholder='ex: New York'
                     label='City'
+                    inputType='text'
                   />
 
                   <div className='flex gap-4'>
@@ -155,12 +174,14 @@ const AuthForm = ({ type }: { type: string }) => {
                       name='state'
                       placeholder='ex: NY'
                       label='State'
+                      inputType='text'
                     />
                     <CustomInput
                       control={form.control}
                       name='postalCode'
                       placeholder='ex: 1234'
                       label='Postal Code'
+                      inputType='number'
                     />
                   </div>
                   <CustomInput
@@ -168,6 +189,7 @@ const AuthForm = ({ type }: { type: string }) => {
                     name='address1'
                     placeholder='enter your specific address'
                     label='Address'
+                    inputType='text'
                   />
                   <div className='flex gap-4'>
                     <CustomInput
@@ -175,12 +197,14 @@ const AuthForm = ({ type }: { type: string }) => {
                       name='dateOfBirth'
                       placeholder='yyyy-mm-dd'
                       label='Date of Birth'
+                      inputType='text'
                     />
                     <CustomInput
                       control={form.control}
                       name='ssn'
                       placeholder='ex: 123-45-6789'
                       label='SSN'
+                      inputType='number'
                     />
                   </div>
                 </>
@@ -191,12 +215,14 @@ const AuthForm = ({ type }: { type: string }) => {
                 name='email'
                 placeholder='Email'
                 label='Email'
+                inputType='email'
               />
               <CustomInput
                 control={form.control}
                 name='password'
                 placeholder='Password'
                 label='Password'
+                inputType='password'
               />
               <div className='flex flex-col gap-4'>
                 <Button type='submit' className='form-btn' disabled={isLoading}>
