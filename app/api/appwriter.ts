@@ -8,18 +8,7 @@ const {
   NEXT_PUBLIC_APPWRITE_PROJECT_ID: APPWRITE_PROJECT_ID,
   NEXT_APPWRITE_KEY: APPWRITE_KEY,
 } = process.env;
-/**
- * Creates a session client for interacting with Appwrite services.
- *
- * This function initializes a new Appwrite Client instance with the endpoint and project ID
- * specified in environment variables. It retrieves the 'appwrite-session' cookie to set the
- * session on the client. If no session is found, it throws an error.
- *
- * @throws {Error} Throws an error if the session cookie is not found.
- *
- * @returns {Object} An object containing the `account` getter, which provides access to
- * Appwrite's Account service using the configured session client.
- */
+
 export async function createSessionClient() {
   const client = new Client()
     .setEndpoint(APPWRITE_ENDPOINT!)

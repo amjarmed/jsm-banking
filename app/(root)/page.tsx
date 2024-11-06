@@ -1,12 +1,13 @@
 import HeaderBox from '@/components/headerBox';
 import RightSideBar from '@/components/navigations/rightSideBar';
 import TotalBalanceBox from '@/components/totalBalanceBox';
+import { redirect } from 'next/navigation';
 import { getLoggedInUser } from '../services/actions/user.auth';
 
 export default async function Home() {
   const loggedIn = await getLoggedInUser();
 
-  //if (!user) redirect('/sign-in');
+  if (!loggedIn) redirect('/sign-in');
   return (
     <section id='home' className='home '>
       <div className='home-content'>

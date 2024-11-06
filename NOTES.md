@@ -19,8 +19,9 @@ day-2 :01:03:00 minutes
 day-3 :02:34:14 minutes
 day-4 : 03:05:55 minutes
 day-5 : 03:16:30 minutes
-day-6 : 03:37:01 minutes
-day-7 : 04:02:00 minutes
+day-6 : 03:37:01 minutes | cors
+day-7 : 04:10:00 minutes
+day-8 : 04:00:00 minutes | cors => solution was to add "use server"
 
 ---
 
@@ -58,6 +59,9 @@ day-7 : 04:02:00 minutes
 - using dwolla as payment processor
 - making your function atomic
 - using pino for logging
+- more than 3 days for search for the solution of cors , when i found the solution (use nexResponse + route+ POST , then send req with fetch from frontend) , the solution was to add "use server" at the top of the file
+  username: user_good
+  password: pass_good
 
 ## notes from outside the tutorial
 

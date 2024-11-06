@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  productionBrowserSourceMaps: false,
   serverExternalPackages: ['import-in-the-middle'],
   experimental: {
     turbo: {

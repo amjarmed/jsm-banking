@@ -77,8 +77,6 @@ const AuthForm = ({ type }: { type: string }) => {
         };
         const newUser = await signUp(userData);
         setLoggedInUser(newUser);
-
-        if (newUser) router.push('/');
       }
 
       //================= sign In ======
@@ -135,7 +133,7 @@ const AuthForm = ({ type }: { type: string }) => {
       {/* check for user  */}
       {loggedInUser ? (
         <div className='flex flex-col gap-4'>
-          <PlaidLink user={loggedInUser!} variant='primary' />
+          <PlaidLink user={loggedInUser} variant='primary' />
         </div>
       ) : (
         <>

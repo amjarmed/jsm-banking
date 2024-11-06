@@ -330,7 +330,10 @@ export const AuthFormSchema = (type: string) =>
     state:
       type === 'sign-in'
         ? z.string().optional()
-        : z.string().length(2, { message: 'State must be 2 characters' }),
+        : z
+            .string()
+            .length(2, { message: 'State must be 2 characters' })
+            .default('NY'),
     city:
       type === 'sign-in'
         ? z.string().optional()

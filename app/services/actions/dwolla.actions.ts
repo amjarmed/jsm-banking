@@ -1,15 +1,7 @@
 'use server';
-import { handleDwollaError } from '@/lib/utils';
+
 import { Client } from 'dwolla-v2';
 
-//========= Dowolla is a payment processor ==========
-
-/**
- * Retrieves the current Dwolla environment setting.
- *
- * @returns {'production' | 'sandbox'} - The environment type, either 'production' or 'sandbox'.
- * @throws {Error} If the environment is not set to 'sandbox' or 'production'.
- */
 const getEnvironment = (): 'production' | 'sandbox' => {
   const environment = process.env.DWOLLA_ENV as string;
 
@@ -24,22 +16,14 @@ const getEnvironment = (): 'production' | 'sandbox' => {
       );
   }
 };
-// Create a Dwolla Client
+
 const dwollaClient = new Client({
   environment: getEnvironment(),
-  key: process.env.DWOLLA_KEY as string,
-  secret: process.env.DWOLLA_SECRET as string,
+  key: process.env.DWOLLA_APP_KEY as string,
+  secret: process.env.DWOLLA_APP_SECRET as string,
 });
 
-/**
- * Creates a new Dwolla Funding Source using the provided Plaid Processor Token.
- *
- * @param {CreateFundingSourceOptions} options
- * @param {string} options.customerId - The Dwolla Customer ID.
- * @param {string} options.fundingSourceName - The Dwolla Funding Source name.
- * @param {string} options.plaidToken - The Plaid Processor Token.
- * @returns {Promise<string | null>} The Dwolla Funding Source URL, or null if the request fails.
- */
+// Create a Dwolla Funding Source using a Plaid Processor Token
 export const createFundingSource = async (
   options: CreateFundingSourceOptions,
 ) => {
@@ -55,11 +39,6 @@ export const createFundingSource = async (
   }
 };
 
-/**
- * Creates a new Dwolla On Demand Authorization and returns the authorization URL.
- *
- * @returns {Promise<{[key: string]: string} | null>} The authorization URL, or null if the request fails.
- */
 export const createOnDemandAuthorization = async () => {
   try {
     const onDemandAuthorization = await dwollaClient.post(
@@ -72,12 +51,6 @@ export const createOnDemandAuthorization = async () => {
   }
 };
 
-/**
- * Creates a new Dwolla Customer.
- *
- * @param {NewDwollaCustomerParams} newCustomer - The new Dwolla Customer parameters.
- * @returns {Promise<string | null>} The Dwolla Customer URL, or null if the request fails.
- */
 export const createDwollaCustomer = async (
   newCustomer: NewDwollaCustomerParams,
 ) => {
@@ -85,20 +58,11 @@ export const createDwollaCustomer = async (
     return await dwollaClient
       .post('customers', newCustomer)
       .then((res) => res.headers.get('location'));
-  } catch (error) {
-    handleDwollaError(error);
+  } catch (err) {
+    console.error('Creating a Dwolla Customer Failed: ', err);
   }
 };
 
-/**
- * Creates a new Dwolla Transfer using the provided source and destination Funding Source URLs and amount.
- *
- * @param {TransferParams} transferParams - The Dwolla Transfer parameters.
- * @param {string} transferParams.sourceFundingSourceUrl - The source Funding Source URL.
- * @param {string} transferParams.destinationFundingSourceUrl - The destination Funding Source URL.
- * @param {string} transferParams.amount - The amount to transfer.
- * @returns {Promise<string | null>} The Dwolla Transfer URL, or null if the request fails.
- */
 export const createTransfer = async ({
   sourceFundingSourceUrl,
   destinationFundingSourceUrl,
@@ -127,15 +91,6 @@ export const createTransfer = async ({
   }
 };
 
-/**
- * Adds a new Funding Source to a Dwolla Customer using a Plaid processor token.
- *
- * @param {AddFundingSourceParams} addFundingSourceParams - The parameters to add a Funding Source.
- * @param {string} addFundingSourceParams.dwollaCustomerId - The Dwolla Customer ID.
- * @param {string} addFundingSourceParams.processorToken - The Plaid processor token.
- * @param {string} addFundingSourceParams.bankName - The name of the bank.
- * @returns {Promise<string | null>} The Dwolla Funding Source URL, or null if the request fails.
- */
 export const addFundingSource = async ({
   dwollaCustomerId,
   processorToken,

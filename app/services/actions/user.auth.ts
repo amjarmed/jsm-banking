@@ -28,7 +28,7 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
       password,
       `${firstName} ${lastName}`,
     );
-    if (!newUserAccount) throw Error('Error creating user account');
+    if (!newUserAccount) throw Error('Error creating user');
 
     // Step 2: Create Dwolla customer
     const dwollaCustomerUrl = await createDwollaCustomer({
@@ -36,6 +36,7 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
       type: 'personal',
     });
     if (!dwollaCustomerUrl) throw Error('Error creating Dwolla customer');
+
     const dwollaCustomerId = extractCustomerIdFromUrl(dwollaCustomerUrl);
 
     // Step 3: Add user to the database
@@ -61,10 +62,10 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
       secure: true,
     });
     console.log('sign up new account successfully!');
+
     return parseStringify(newUser);
   } catch (error) {
-    // handleAppError(error);
-    console.log(error);
+    console.log('Error signing up:', error);
   }
 };
 
