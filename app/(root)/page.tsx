@@ -9,15 +9,15 @@ export default async function Home() {
 
   if (!loggedIn) redirect('/sign-in');
   return (
-    <section id='home' className='home '>
-      <div className='home-content'>
-        <header className='home-header'>
+    <section id="home" className="home ">
+      <div className="home-content">
+        <header className="home-header">
           {/* welcome message  */}
           <HeaderBox
-            type='greeting'
-            title='Welcome'
+            type="greeting"
+            title="Welcome"
             user={loggedIn?.name || 'Guest'}
-            subtext='Access and manage your account and transactions efficiently.'
+            subtext="Access and manage your account and transactions efficiently."
           />
 
           {/*  balance in account  */}

@@ -21,7 +21,7 @@ day-4 : 03:05:55 minutes
 day-5 : 03:16:30 minutes
 day-6 : 03:37:01 minutes | cors
 day-7 : 04:10:00 minutes
-day-8 : 04:00:00 minutes | cors => solution was to add "use server"
+day-8 : 04:40:00 minutes | cors => solution was to add "use server"
 
 ---
 
@@ -60,8 +60,12 @@ day-8 : 04:00:00 minutes | cors => solution was to add "use server"
 - making your function atomic
 - using pino for logging
 - more than 3 days for search for the solution of cors , when i found the solution (use nexResponse + route+ POST , then send req with fetch from frontend) , the solution was to add "use server" at the top of the file
-  username: user_good
-  password: pass_good
+
+- plaid: is about connect apps with your bank accounts make it easy to access account info
+- dwolla : halp to send and receive and request payment in real time payment
+
+username: user_good
+password: pass_good
 
 ## notes from outside the tutorial
 
@@ -75,18 +79,3 @@ day-8 : 04:00:00 minutes | cors => solution was to add "use server"
 - Update documents [databases.updateDocument()]
 
 - Run all tasks [runAllTasks()]
-
-## How BaaS works
-
-In traditional app development, you'd need to set up and manage databases, write APIs, and handle other backend tasks yourself. But with BaaS, all these services are ready-made for you. You interact with them through APIs, without having to worry about scaling.
-
-- BaaS handles things like:
-- User authentication
-- File storage
-- Database management
-- Serverless functions
-- Real-time synchronization
-- Push notifications
-
-This way, you don’t have to reinvent the wheel. You can simply plug in these reliable, pre-built solutions and focus on building your app, making it easier to scale and grow without the hassle.
-RED MORE <https://appwrite.io/blog/post/backend-as-a-service-baas?ref=dailydev>
