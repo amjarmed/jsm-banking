@@ -8,10 +8,7 @@ import { getAccount, getAccounts } from '../services/actions/bank.actions';
 export default async function Home(props: SearchParamProps) {
   const searchParams = await props.searchParams;
 
-  const {
-    id,
-    page
-  } = searchParams;
+  const { id, page } = searchParams;
 
   const currentPage = Number(page as string) || 1;
   const loggedIn = await getLoggedInUser();
