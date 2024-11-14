@@ -11,6 +11,7 @@ import {
   Products,
 } from 'plaid';
 import { addFundingSource } from './dwolla.actions';
+import { log } from 'console';
 const {
   APPWRITER_DATABASE_ID: DATABASE_ID,
   APPWRITE_USER_COLLECTION_ID: USER_COLLECTION_ID,
@@ -131,6 +132,8 @@ export const createBankAccount = async ({
   }
 };
 
+// get banks
+
 export const getBanks = async ({ userId }: getBanksProps) => {
   try {
     const { database } = await createAdminClient();
@@ -138,14 +141,16 @@ export const getBanks = async ({ userId }: getBanksProps) => {
     const banks = await database.listDocuments(
       DATABASE_ID!,
       BANK_COLLECTION_ID!,
-      [Query.equal('userId', [userId])],
+      [Query.equal('userId', userId)],
     );
 
     return parseStringify(banks.documents);
   } catch (error) {
-    console.log(error);
+    console.log('Get Banks Failed:', error);
   }
 };
+
+// get  bank
 
 export const getBank = async ({ documentId }: getBankProps) => {
   try {
@@ -154,31 +159,12 @@ export const getBank = async ({ documentId }: getBankProps) => {
     const bank = await database.listDocuments(
       DATABASE_ID!,
       BANK_COLLECTION_ID!,
-      [Query.equal('$id', [documentId])],
+      [Query.equal('$id', documentId)],
     );
+    console.log('bank info', bank);
 
     return parseStringify(bank.documents[0]);
   } catch (error) {
-    console.log(error);
-  }
-};
-
-export const getBankByAccountId = async ({
-  accountId,
-}: getBankByAccountIdProps) => {
-  try {
-    const { database } = await createAdminClient();
-
-    const bank = await database.listDocuments(
-      DATABASE_ID!,
-      BANK_COLLECTION_ID!,
-      [Query.equal('accountId', [accountId])],
-    );
-
-    if (bank.total !== 1) return null;
-
-    return parseStringify(bank.documents[0]);
-  } catch (error) {
-    console.log(error);
+    console.log('Get Bank Failed:', error);
   }
 };

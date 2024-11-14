@@ -29,7 +29,7 @@ function UsersList() {
         <ul className='list-disc list-inside'>
           {users.map((user) => (
             <li className='mb-2 text-pretty' key={user.id}>
-              {user.name} | {user.address.city}
+              {user.firstName} | {user.address.city}
             </li>
           ))}
         </ul>

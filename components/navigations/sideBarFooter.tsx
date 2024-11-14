@@ -18,7 +18,7 @@ const SideBarFooter = ({ user, type = 'desktop' }: FooterProps) => {
           type === 'mobile' ? 'footer_name-mobile' : 'footer_name'
         } `}
       >
-        <p className="text-xl font-bold text-gray-700">{user.name[0]}</p>
+        <p className="text-xl font-bold text-gray-700">{user.name}</p>
       </div>
       <div
         className={` ${
@@ -26,7 +26,7 @@ const SideBarFooter = ({ user, type = 'desktop' }: FooterProps) => {
         } `}
       >
         <h1 className="text-14 font-semibold truncate text-gray-700">
-          {user.name}
+          {user.firstName}
         </h1>
         <p className="text-14 font-normal text-gray-600 truncate ">
           {user.email}

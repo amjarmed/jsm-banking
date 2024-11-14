@@ -2,7 +2,7 @@
 import { createAdminClient, createSessionClient } from '@/app/api/appwriter';
 import { extractCustomerIdFromUrl, parseStringify } from '@/lib/utils';
 import { cookies } from 'next/headers';
-import { ID } from 'node-appwrite';
+import { ID, Query } from 'node-appwrite';
 import { createDwollaCustomer } from './dwolla.actions';
 const {
   APPWRITER_DATABASE_ID: DATABASE_ID,
@@ -79,17 +79,38 @@ export const signIn = async ({ email, password }: LoginUser) => {
   try {
     // create user account
     const { account } = await createAdminClient();
-    const response = await account.createEmailPasswordSession(email, password);
-    (await cookies()).set('appwrite-session', response.secret, {
+
+    const session = await account.createEmailPasswordSession(email, password);
+
+    (await cookies()).set('appwrite-session', session.secret, {
       path: '/',
       httpOnly: true,
       sameSite: 'strict',
       secure: true,
     });
+
+    const user = await getUserInfo({ userId: session.userId });
+
     console.info(`logged in successfully !`);
-    return parseStringify(response);
+    return parseStringify(user);
   } catch (error) {
     console.error(`Error occurred: ${error}`);
+  }
+};
+
+export const getUserInfo = async ({ userId }: getUserInfoProps) => {
+  try {
+    const { database } = await createAdminClient();
+
+    const user = await database.listDocuments(
+      DATABASE_ID!,
+      USER_COLLECTION_ID!,
+      [Query.equal('userId', userId)],
+    );
+
+    return parseStringify(user.documents[0]);
+  } catch (error) {
+    console.log('Get user info Failed:', error);
   }
 };
 
@@ -102,7 +123,12 @@ export const signIn = async ({ email, password }: LoginUser) => {
 export async function getLoggedInUser() {
   try {
     const { account } = await createSessionClient();
-    const user = await account.get();
+    const result = await account.get();
+    const user = await getUserInfo({ userId: result.$id });
+    console.log(`logged in successfully !`, {
+      email: user.email,
+      id: user.$id,
+    });
     return parseStringify(user);
   } catch (error) {
     console.error(` Error getting logged in user: ${error}`);

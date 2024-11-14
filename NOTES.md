@@ -22,6 +22,7 @@ day-5 : 03:16:30 minutes
 day-6 : 03:37:01 minutes | cors
 day-7 : 04:10:00 minutes
 day-8 : 04:40:00 minutes | cors => solution was to add "use server"
+day-9 : 04:43:00 minutes
 
 ---
 
@@ -64,8 +65,9 @@ day-8 : 04:40:00 minutes | cors => solution was to add "use server"
 - plaid: is about connect apps with your bank accounts make it easy to access account info
 - dwolla : halp to send and receive and request payment in real time payment
 
-username: user_good
-password: pass_good
+## Bank Actions
+
+-
 
 ## notes from outside the tutorial
 
