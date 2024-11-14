@@ -5,9 +5,14 @@ import { redirect } from 'next/navigation';
 import { getLoggedInUser } from '../services/actions/user.auth';
 import { getAccount, getAccounts } from '../services/actions/bank.actions';
 
-export default async function Home({
-  searchParams: { id, page },
-}: SearchParamProps) {
+export default async function Home(props: SearchParamProps) {
+  const searchParams = await props.searchParams;
+
+  const {
+    id,
+    page
+  } = searchParams;
+
   const currentPage = Number(page as string) || 1;
   const loggedIn = await getLoggedInUser();
   const accounts = await getAccounts({
