@@ -23,6 +23,8 @@ day-6 : 03:37:01 minutes | cors
 day-7 : 04:10:00 minutes
 day-8 : 04:40:00 minutes | cors => solution was to add "use server"
 day-9 : 04:43:00 minutes
+day-10 : 05:04:00 minutes | => 'Invalid query: Query value is invalid for attribute "$id"', (sabab exchange token invalid )
+day-11 : 04:43:00 minutes
 
 ---
 

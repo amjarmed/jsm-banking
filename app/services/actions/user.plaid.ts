@@ -11,7 +11,6 @@ import {
   Products,
 } from 'plaid';
 import { addFundingSource } from './dwolla.actions';
-import { log } from 'console';
 const {
   APPWRITER_DATABASE_ID: DATABASE_ID,
   APPWRITE_USER_COLLECTION_ID: USER_COLLECTION_ID,
@@ -50,7 +49,7 @@ export const exchangePublicToken = async ({
     const response = await plaidClient.itemPublicTokenExchange({
       public_token: publicToken,
     });
-
+    console.log(response);
     const accessToken = response.data.access_token;
     const itemId = response.data.item_id;
 
@@ -128,11 +127,9 @@ export const createBankAccount = async ({
 
     return parseStringify(bankAccount);
   } catch (error) {
-    console.log('Create Bank Account Failed:', error);
+    console.log('Create Bank Collection Failed:', error);
   }
 };
-
-// get banks
 
 export const getBanks = async ({ userId }: getBanksProps) => {
   try {
@@ -141,16 +138,19 @@ export const getBanks = async ({ userId }: getBanksProps) => {
     const banks = await database.listDocuments(
       DATABASE_ID!,
       BANK_COLLECTION_ID!,
-      [Query.equal('userId', userId)],
+      [Query.equal('userId', [userId])],
     );
+
+    if (banks.total === 0) {
+      console.log('User has 0 Banks');
+    }
+    // for debug
 
     return parseStringify(banks.documents);
   } catch (error) {
     console.log('Get Banks Failed:', error);
   }
 };
-
-// get  bank
 
 export const getBank = async ({ documentId }: getBankProps) => {
   try {
@@ -159,12 +159,35 @@ export const getBank = async ({ documentId }: getBankProps) => {
     const bank = await database.listDocuments(
       DATABASE_ID!,
       BANK_COLLECTION_ID!,
-      [Query.equal('$id', documentId)],
+      [Query.equal('$id', [documentId])],
     );
-    console.log('bank info', bank);
+
+    if (bank.total === 0 || bank.documents[0]) {
+      console.log(' user has 0 banks or 0 documents');
+    }
 
     return parseStringify(bank.documents[0]);
   } catch (error) {
     console.log('Get Bank Failed:', error);
+  }
+};
+
+export const getBankByAccountId = async ({
+  accountId,
+}: getBankByAccountIdProps) => {
+  try {
+    const { database } = await createAdminClient();
+
+    const bank = await database.listDocuments(
+      DATABASE_ID!,
+      BANK_COLLECTION_ID!,
+      [Query.equal('accountId', [accountId])],
+    );
+
+    if (bank.total !== 1) return null;
+
+    return parseStringify(bank.documents[0]);
+  } catch (error) {
+    console.log(error);
   }
 };

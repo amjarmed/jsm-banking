@@ -13,13 +13,12 @@ import { plaidClient } from '@/app/api/plaid';
 import { parseStringify } from '@/lib/utils';
 import { getTransactionsByBankId } from './transaction.actions';
 
-
 // Get multiple bank accounts
 export const getAccounts = async ({ userId }: getAccountsProps) => {
   try {
     // get banks from db
     const banks = await getBanks({ userId });
-
+    console.log('getAccounts called banks: ', );
     const accounts = await Promise.all(
       banks?.map(async (bank: Bank) => {
         // get each account info from plaid

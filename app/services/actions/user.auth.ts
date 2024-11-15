@@ -7,7 +7,6 @@ import { createDwollaCustomer } from './dwolla.actions';
 const {
   APPWRITER_DATABASE_ID: DATABASE_ID,
   APPWRITE_USER_COLLECTION_ID: USER_COLLECTION_ID,
-  APPWRITE_BANK_COLLECTION_ID: BANK_COLLECTION_ID,
 } = process.env;
 
 /**
@@ -35,6 +34,7 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
       ...userData,
       type: 'personal',
     });
+
     if (!dwollaCustomerUrl) throw Error('Error creating Dwolla customer');
 
     const dwollaCustomerId = extractCustomerIdFromUrl(dwollaCustomerUrl);
@@ -89,6 +89,7 @@ export const signIn = async ({ email, password }: LoginUser) => {
       secure: true,
     });
 
+    console.info(`session user id:`, session.userId);
     const user = await getUserInfo({ userId: session.userId });
 
     console.info(`logged in successfully !`);
@@ -125,10 +126,6 @@ export async function getLoggedInUser() {
     const { account } = await createSessionClient();
     const result = await account.get();
     const user = await getUserInfo({ userId: result.$id });
-    console.log(`logged in successfully !`, {
-      email: user.email,
-      id: user.$id,
-    });
     return parseStringify(user);
   } catch (error) {
     console.error(` Error getting logged in user: ${error}`);

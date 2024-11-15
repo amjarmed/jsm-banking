@@ -2,6 +2,20 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Project wide type checking with TypeScript",
+      "type": "npm",
+      "script": "check-types",
+      "problemMatcher": ["$tsc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "clear": true,
+        "reveal": "never"
+      }
+    },
+    {
       "label": "Start Next.js Dev Server",
       "type": "shell",
       "command": "pnd",
@@ -21,5 +35,6 @@
         "isDefault": true
       }
     }
+    
   ]
 }

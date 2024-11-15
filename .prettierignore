@@ -1,0 +1,18 @@
+# Ignore compiled files
+dist/
+build/
+
+# Node modules
+node_modules/
+
+# Ignore configuration files
+*.config.js
+*.min.js
+
+# Ignore specific files
+public/vendor.js
+src/legacyCode/**
+
+# Ignore Markdown or JSON examples
+examples/*.md
+data/sample.json
