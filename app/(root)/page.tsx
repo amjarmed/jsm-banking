@@ -10,6 +10,8 @@ export default async function Home(props: SearchParamProps) {
 
   const { id, page } = searchParams;
 
+  const { id, page } = searchParams;
+
   const currentPage = Number(page as string) || 1;
   const loggedIn = await getLoggedInUser();
   const accounts = await getAccounts({
