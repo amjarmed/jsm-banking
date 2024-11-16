@@ -39,7 +39,7 @@ function SideBar({ user }: SideBarProps) {
                 />
               </div>
               <p
-                className={cn('sidebar-label', {
+                    className={cn('sidebar-label', {
                   '!text-white': isActive,
                 })}
               >
