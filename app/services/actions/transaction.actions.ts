@@ -5,8 +5,8 @@ import { parseStringify } from '@/lib/utils';
 import { ID, Query } from 'node-appwrite';
 
 const {
-  APPWRITE_DATABASE_ID: DATABASE_ID,
-  APPWRITE_TRANSACTION_COLLECTION_ID: TRANSACTION_COLLECTION_ID,
+  APPWRITER_DATABASE_ID: DATABASE_ID,
+  APPWRITER_TRANSACTION_COLLECTION_ID: TRANSACTION_COLLECTION_ID,
 } = process.env;
 
 export const createTransaction = async (
@@ -28,9 +28,23 @@ export const createTransaction = async (
 
     return parseStringify(newTransaction);
   } catch (error) {
-    console.log(error);
+    console.trace(error);
   }
 };
+
+/**
+ * Retrieves all transactions associated with a given bank ID.
+ * The transactions include both sender and receiver transactions
+ * where the bank ID is involved.
+ * 
+ * @param {Object} getTransactionsByBankIdProps - The properties for retrieving transactions.
+ * @param {string} getTransactionsByBankIdProps.bankId - The bank ID to filter transactions by.
+ * 
+ * @returns {Promise<Object>} - A promise that resolves to an object containing the total number of transactions
+ * and an array of transaction documents.
+ * 
+ * @throws Will log an error message if the operation fails.
+ */
 
 export const getTransactionsByBankId = async ({
   bankId,
@@ -43,13 +57,14 @@ export const getTransactionsByBankId = async ({
       TRANSACTION_COLLECTION_ID!,
       [Query.equal('senderBankId', bankId)],
     );
+    console.log('senderTransactions:', senderTransactions);
 
     const receiverTransactions = await database.listDocuments(
       DATABASE_ID!,
       TRANSACTION_COLLECTION_ID!,
       [Query.equal('receiverBankId', bankId)],
     );
-
+// 5-16
     const transactions = {
       total: senderTransactions.total + receiverTransactions.total,
       documents: [

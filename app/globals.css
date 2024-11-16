@@ -42,7 +42,7 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #7878a3;
 }
-
+/*  */
 /*  */
 @layer utilities {
   .input-class {
@@ -238,7 +238,7 @@
   .bank-info {
     @apply gap-[18px] flex p-4 transition-all border bg-blue-25 border-transparent;
   }
-
+/*  */
   /* Category Badge */
   .category-badge {
     @apply flex-center truncate w-fit gap-1 rounded-2xl border-[1.5px] py-[2px] pl-1.5 pr-2;

@@ -6,7 +6,17 @@
     "package-lock.json": true,
     "yarn.lock": true,
     "pnpm-lock.yaml": true,
-    "pnpm-workspace.yaml": true
+    "pnpm-workspace.yaml": true,
+    "node_modules": true,
+    "dist": true,
+    "build": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    ".next": true,
+    "**/.next/**": true,
+    ".vscode": true,
+    "**/.vscode/**": true
+
   },
   // Prettier settings for frontend
   "prettier.singleQuote": true,

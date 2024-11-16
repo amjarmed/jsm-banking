@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from './logo';
 import SideBarFooter from './sideBarFooter';
+import PlaidLink from '../banks/plaid-link';
 
 function SideBar({ user }: SideBarProps) {
   const pathname = usePathname();
@@ -48,7 +49,7 @@ function SideBar({ user }: SideBarProps) {
           );
         })}
         {/* user profile */}
-        <p className='text-neutral-200'>USER PROFILE</p>
+        <PlaidLink user={user}  />
       </nav>
       {/* sidebar  footer */}
       <SideBarFooter user={user} type='desktop' />

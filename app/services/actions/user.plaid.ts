@@ -162,9 +162,6 @@ export const getBank = async ({ documentId }: getBankProps) => {
       [Query.equal('$id', [documentId])],
     );
 
-    if (bank.total === 0 || bank.documents[0]) {
-      console.log(' user has 0 banks or 0 documents');
-    }
 
     return parseStringify(bank.documents[0]);
   } catch (error) {
