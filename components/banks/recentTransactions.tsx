@@ -5,6 +5,7 @@ import { BankTabItem } from './bankTabItem';
 import BankInfo from './bankInfo';
 import TransactionsTable from './transactionsTable';
 
+
 function RecentTransactions({
   accounts,
   transactions = [],
