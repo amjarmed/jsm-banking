@@ -1,9 +1,9 @@
 'use server';
-import { createAdminClient, createSessionClient } from '@/app/api/appwriter';
-import { extractCustomerIdFromUrl, parseStringify } from '@/lib/utils';
-import { cookies } from 'next/headers';
-import { ID, Query } from 'node-appwrite';
-import { createDwollaCustomer } from './dwolla.actions';
+import {createAdminClient, createSessionClient} from '@/app/api/appwriter';
+import {extractCustomerIdFromUrl, parseStringify} from '@/lib/utils';
+import {cookies} from 'next/headers';
+import {ID, Query} from 'node-appwrite';
+import {createDwollaCustomer} from './dwolla.actions';
 const {
   APPWRITER_DATABASE_ID: DATABASE_ID,
   APPWRITE_USER_COLLECTION_ID: USER_COLLECTION_ID,
@@ -14,18 +14,18 @@ const {
  * @param {SignUpParams} userData - User data to sign up with.
  * @returns {Promise<string>} - The newly created user document as a JSON string.
  */
-export const signUp = async ({ password, ...userData }: SignUpParams) => {
-  const { email, firstName, lastName } = userData;
+export const signUp = async ({password, ...userData}: SignUpParams) => {
+  const {email, firstName, lastName} = userData;
   let newUserAccount;
 
   try {
-    const { account, database } = await createAdminClient();
+    const {account, database} = await createAdminClient();
     // Step 1: Create user account
     newUserAccount = await account.create(
       ID.unique(),
       email,
       password,
-      `${firstName} ${lastName}`,
+      `${firstName} ${lastName}`
     );
     if (!newUserAccount) throw Error('Error creating user');
 
@@ -49,7 +49,7 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
         userId: newUserAccount.$id,
         dwollaCustomerUrl,
         dwollaCustomerId,
-      },
+      }
     );
     if (!newUser) throw new Error('Error creating user document');
 
@@ -61,7 +61,6 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
       sameSite: 'strict',
       secure: true,
     });
-    console.log('sign up new account successfully!');
 
     return parseStringify(newUser);
   } catch (error) {
@@ -75,10 +74,10 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
  * @param data - Data to sign in with
  * @returns The newly created session document
  */
-export const signIn = async ({ email, password }: LoginUser) => {
+export const signIn = async ({email, password}: LoginUser) => {
   try {
     // create user account
-    const { account } = await createAdminClient();
+    const {account} = await createAdminClient();
 
     const session = await account.createEmailPasswordSession(email, password);
 
@@ -90,7 +89,7 @@ export const signIn = async ({ email, password }: LoginUser) => {
     });
 
     console.info(`session user id:`, session.userId);
-    const user = await getUserInfo({ userId: session.userId });
+    const user = await getUserInfo({userId: session.userId});
 
     console.info(`logged in successfully !`);
     return parseStringify(user);
@@ -99,14 +98,14 @@ export const signIn = async ({ email, password }: LoginUser) => {
   }
 };
 
-export const getUserInfo = async ({ userId }: getUserInfoProps) => {
+export const getUserInfo = async ({userId}: getUserInfoProps) => {
   try {
-    const { database } = await createAdminClient();
+    const {database} = await createAdminClient();
 
     const user = await database.listDocuments(
       DATABASE_ID!,
       USER_COLLECTION_ID!,
-      [Query.equal('userId', userId)],
+      [Query.equal('userId', userId)]
     );
 
     return parseStringify(user.documents[0]);
@@ -123,9 +122,9 @@ export const getUserInfo = async ({ userId }: getUserInfoProps) => {
 
 export async function getLoggedInUser() {
   try {
-    const { account } = await createSessionClient();
+    const {account} = await createSessionClient();
     const result = await account.get();
-    const user = await getUserInfo({ userId: result.$id });
+    const user = await getUserInfo({userId: result.$id});
     return parseStringify(user);
   } catch (error) {
     console.error(` Error getting logged in user: ${error}`);
@@ -139,7 +138,7 @@ export async function getLoggedInUser() {
  */
 export async function signOut() {
   try {
-    const { account } = await createSessionClient();
+    const {account} = await createSessionClient();
 
     (await cookies()).delete('appwrite-session');
     await account.deleteSession('current');

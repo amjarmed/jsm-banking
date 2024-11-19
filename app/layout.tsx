@@ -1,6 +1,5 @@
-
-import type { Metadata } from 'next';
-import { IBM_Plex_Serif, Inter } from 'next/font/google';
+import type {Metadata} from 'next';
+import {IBM_Plex_Serif, Inter} from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({
@@ -27,12 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' className='min-w-[320px] min-h-screen'>
+    <html lang="en" className="min-w-[320px] min-h-screen">
       <body
         className={`${inter.variable} ${imbPlexSerif.variable} antialiased`}
       >
         {children}
-
       </body>
     </html>
   );

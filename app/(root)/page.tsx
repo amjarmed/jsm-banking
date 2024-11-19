@@ -1,15 +1,15 @@
 import HeaderBox from '@/components/headerBox';
 import RightSideBar from '@/components/navigations/rightSideBar';
 import TotalBalanceBox from '@/components/totalBalanceBox';
-import { redirect } from 'next/navigation';
-import { getLoggedInUser } from '../services/actions/user.auth';
-import { getAccount, getAccounts } from '../services/actions/bank.actions';
+import {redirect} from 'next/navigation';
+import {getLoggedInUser} from '../services/actions/user.auth';
+import {getAccount, getAccounts} from '../services/actions/bank.actions';
 import RecentTransactions from '@/components/banks/recentTransactions';
 
 export default async function Home(props: SearchParamProps) {
   const searchParams = await props.searchParams;
 
-  const { id, page } = searchParams;
+  const {id, page} = searchParams;
   const currentPage = Number(page as string) || 1;
 
   const loggedIn = await getLoggedInUser();
@@ -23,7 +23,7 @@ export default async function Home(props: SearchParamProps) {
   const accountsData = accounts?.data;
 
   const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
-  const account = await getAccount({ appwriteItemId });
+  const account = await getAccount({appwriteItemId});
 
   return (
     <section id="home" className="home ">

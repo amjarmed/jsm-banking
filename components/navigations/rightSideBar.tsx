@@ -1,8 +1,8 @@
-import { Plus } from 'lucide-react';
+import {Plus} from 'lucide-react';
 import Link from 'next/link';
 import BankCard from '../banks/bankCard';
 
-const RightSideBar = ({ user, transactions, banks }: RightSidebarProps) => {
+const RightSideBar = ({user, transactions, banks}: RightSidebarProps) => {
   return (
     <aside className="right-sidebar">
       {/* profile */}

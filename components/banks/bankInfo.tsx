@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useSearchParams, useRouter } from 'next/navigation';
+import {useSearchParams, useRouter} from 'next/navigation';
 
 import {
   cn,
@@ -10,7 +10,7 @@ import {
   getAccountTypeColors,
 } from '@/lib/utils';
 
-const BankInfo = ({ account, appwriteItemId, type }: BankInfoProps) => {
+const BankInfo = ({account, appwriteItemId, type}: BankInfoProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -22,7 +22,7 @@ const BankInfo = ({ account, appwriteItemId, type }: BankInfoProps) => {
       key: 'id',
       value: account?.appwriteItemId,
     });
-    router.push(newUrl, { scroll: false });
+    router.push(newUrl, {scroll: false});
   };
 
   const colors = getAccountTypeColors(account?.type as AccountTypes);

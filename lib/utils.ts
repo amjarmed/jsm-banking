@@ -1,8 +1,8 @@
 /* eslint-disable no-prototype-builtins */
-import { type ClassValue, clsx } from 'clsx';
+import {type ClassValue, clsx} from 'clsx';
 import qs from 'query-string';
-import { twMerge } from 'tailwind-merge';
-import { z } from 'zod';
+import {twMerge} from 'tailwind-merge';
+import {z} from 'zod';
 
 /**
  * A shortcut for `twMerge(clsx(...inputs))` that merges the input classnames
@@ -59,22 +59,22 @@ export const formatDateTime = (dateString: Date) => {
 
   const formattedDateTime: string = new Date(dateString).toLocaleString(
     'en-US',
-    dateTimeOptions,
+    dateTimeOptions
   );
 
   const formattedDateDay: string = new Date(dateString).toLocaleString(
     'en-US',
-    dateDayOptions,
+    dateDayOptions
   );
 
   const formattedDate: string = new Date(dateString).toLocaleString(
     'en-US',
-    dateOptions,
+    dateOptions
   );
 
   const formattedTime: string = new Date(dateString).toLocaleString(
     'en-US',
-    timeOptions,
+    timeOptions
   );
 
   return {
@@ -151,7 +151,7 @@ interface UrlQueryParams {
   key: string;
   value: string;
 }
-export function formUrlQuery({ params, key, value }: UrlQueryParams) {
+export function formUrlQuery({params, key, value}: UrlQueryParams) {
   const currentUrl = qs.parse(params);
 
   currentUrl[key] = value;
@@ -161,7 +161,7 @@ export function formUrlQuery({ params, key, value }: UrlQueryParams) {
       url: window.location.pathname,
       query: currentUrl,
     },
-    { skipNull: true },
+    {skipNull: true}
   );
 }
 
@@ -205,7 +205,7 @@ export function getAccountTypeColors(type: AccountTypes) {
   }
 }
 
-/* 
+/*
 export function countTransactionCategories(
   transactions: Transaction[],
 ): CategoryCount[] {
@@ -318,49 +318,49 @@ export const AuthFormSchema = (type: string) =>
     firstName:
       type === 'sign-in'
         ? z.string().optional()
-        : z.string().min(2, { message: 'First name is required' }),
+        : z.string().min(2, {message: 'First name is required'}),
     lastName:
       type === 'sign-in'
         ? z.string().optional()
-        : z.string().min(2, { message: 'Last name is required' }),
+        : z.string().min(2, {message: 'Last name is required'}),
     address1:
       type === 'sign-in'
         ? z.string().optional()
-        : z.string().min(5, { message: 'Address is required' }),
+        : z.string().min(5, {message: 'Address is required'}),
     state:
       type === 'sign-in'
         ? z.string().optional()
         : z
             .string()
-            .length(2, { message: 'State must be 2 characters' })
+            .length(2, {message: 'State must be 2 characters'})
             .default('NY'),
     city:
       type === 'sign-in'
         ? z.string().optional()
-        : z.string().min(2, { message: 'City is required' }),
+        : z.string().min(2, {message: 'City is required'}),
     postalCode:
       type === 'sign-in'
         ? z.string().optional()
         : z
             .string()
-            .length(5, { message: 'Postal code must be 5 digits' })
-            .regex(/^\d{5}$/, { message: 'Postal code must be numeric' }),
+            .length(5, {message: 'Postal code must be 5 digits'})
+            .regex(/^\d{5}$/, {message: 'Postal code must be numeric'}),
     dateOfBirth:
       type === 'sign-in'
         ? z.string().optional()
-        : z.string().min(10, { message: 'Date of birth is required' }),
+        : z.string().min(10, {message: 'Date of birth is required'}),
     ssn:
       type === 'sign-in'
         ? z.string().optional()
         : z
             .string()
-            .length(9, { message: 'SSN must be 9 digits' })
-            .regex(/^\d{9}$/, { message: 'SSN must be numeric' }),
+            .length(9, {message: 'SSN must be 9 digits'})
+            .regex(/^\d{9}$/, {message: 'SSN must be numeric'}),
     // for both login and signup
-    email: z.string().email({ message: 'Invalid email address' }),
+    email: z.string().email({message: 'Invalid email address'}),
     password: z
       .string()
-      .min(8, { message: 'Password must be at least 8 characters' }),
+      .min(8, {message: 'Password must be at least 8 characters'}),
   });
 
 //============== handling dwolla errors ==========
@@ -387,7 +387,7 @@ interface DwollaValidationError {
 interface DwollaErrorResponse {
   code: DwollaErrorCode;
   message: string;
-  _embedded?: { errors: DwollaValidationError[] };
+  _embedded?: {errors: DwollaValidationError[]};
 }
 
 export function handleDwollaError(error: unknown) {
@@ -395,47 +395,21 @@ export function handleDwollaError(error: unknown) {
   if (error instanceof Error) {
     const errorResponse = JSON.parse(error.message);
     // Extract properties, using optional chaining to handle any undefined cases
-    const { code, message, _embedded } = errorResponse as DwollaErrorResponse;
+    const {code, message, _embedded} = errorResponse as DwollaErrorResponse;
     if (_embedded?.errors?.length) {
       console.error(`- ${code} : ${message}`);
-      _embedded.errors.forEach(({ path, code, message }) =>
-        console.error(`- ${code} ${path ? `Field (${path})` : ''}: ${message}`),
+      _embedded.errors.forEach(({path, code, message}) =>
+        console.error(`- ${code} ${path ? `Field (${path})` : ''}: ${message}`)
       );
     } else {
       // Default error logging for non-validation errors
-      console.log('General Error:\n');
+      console.log('handleDwollaError : General Error:\n');
 
       console.error(parseStringify(message));
     }
   } else {
     console.error(error);
   }
-}
-
-export function handleAppError(error: unknown) {
-  // Check if the error is an instance of Error
-  if (error instanceof Error) {
-    console.log('=============================');
-
-    const errorResponse = JSON.parse(error.message);
-    // Extract properties, using optional chaining to handle any undefined cases
-    const { code, message, _embedded } = errorResponse as DwollaErrorResponse;
-    if (_embedded?.errors?.length) {
-      console.error(`- ${code} : ${message}`);
-      _embedded.errors.forEach(({ path, code, message }) =>
-        console.error(`- ${code} ${path ? `Field (${path})` : ''}: ${message}`),
-      );
-    } else {
-      // Default error logging for non-validation errors
-      console.log('General Error:\n');
-
-      // console.error(parseStringify(message));
-    }
-  } else {
-    console.error(error);
-  }
-
-  console.log('=============================');
 }
 
 // all input types

@@ -1,20 +1,20 @@
 'use client';
-import { sidebarLinks } from '@/constants';
-import { cn } from '@/lib/utils';
+import {sidebarLinks} from '@/constants';
+import {cn} from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import {usePathname} from 'next/navigation';
 import Logo from './logo';
 import SideBarFooter from './sideBarFooter';
 import PlaidLink from '../banks/plaid-link';
 
-function SideBar({ user }: SideBarProps) {
+function SideBar({user}: SideBarProps) {
   const pathname = usePathname();
   return (
-    <section className='sidebar '>
-      <nav className='flex flex-col gap-4'>
+    <section className="sidebar ">
+      <nav className="flex flex-col gap-4">
         {/* main logo */}
-        <Logo styleLink='mb-12' />
+        <Logo styleLink="mb-12" />
 
         {/* side bar links */}
         {sidebarLinks.map((link) => {
@@ -28,7 +28,7 @@ function SideBar({ user }: SideBarProps) {
                 'bg-bank-gradient ': isActive,
               })}
             >
-              <div className='relative size-6'>
+              <div className="relative size-6">
                 <Image
                   src={link.imgURL}
                   alt={link.label}
@@ -39,7 +39,7 @@ function SideBar({ user }: SideBarProps) {
                 />
               </div>
               <p
-                    className={cn('sidebar-label', {
+                className={cn('sidebar-label', {
                   '!text-white': isActive,
                 })}
               >
@@ -49,10 +49,10 @@ function SideBar({ user }: SideBarProps) {
           );
         })}
         {/* user profile */}
-        <PlaidLink user={user}  />
+        <PlaidLink user={user} />
       </nav>
       {/* sidebar  footer */}
-      <SideBarFooter user={user} type='desktop' />
+      <SideBarFooter user={user} type="desktop" />
     </section>
   );
 }

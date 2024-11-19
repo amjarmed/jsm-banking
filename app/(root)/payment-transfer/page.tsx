@@ -1,8 +1,29 @@
-const PaymentTransfer = () => {
+import {getAccounts} from '@/app/services/actions/bank.actions';
+import {getLoggedInUser} from '@/app/services/actions/user.auth';
+import PaymentTransferForm from '@/components/banks/paymentTransferForm';
+import HeaderBox from '@/components/headerBox';
+
+const PaymentTransfer = async () => {
+  const loggedIn = await getLoggedInUser();
+
+  const accounts = await getAccounts({
+    userId: loggedIn.$id,
+  });
+
+  if (!accounts) return;
+
+  const accountsData = accounts?.data;
+
   return (
-    <div>
-      <h1>PaymentTransfer Page</h1>
-    </div>
+    <section className="payment-transfer">
+      <HeaderBox
+        title="Payment Transfer"
+        subtext="Please provide any specific details or notes related to the payments transfer "
+      />
+      <section className="size-full pt-5">
+        <PaymentTransferForm accounts={accountsData} />
+      </section>
+    </section>
   );
 };
 export default PaymentTransfer;

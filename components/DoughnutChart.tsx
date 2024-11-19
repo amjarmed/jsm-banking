@@ -1,12 +1,12 @@
 'use client';
 // DoughnutChart.tsx - DoughnutChart component
 
-import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js/auto';
+import {ArcElement, Chart as ChartJS, Legend, Tooltip} from 'chart.js/auto';
 
-import { Doughnut } from 'react-chartjs-2';
+import {Doughnut} from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-function DoughnutChart({ accounts = [] }: DoughnutChartProps) {
+function DoughnutChart({accounts = []}: DoughnutChartProps) {
   const accountNames = accounts.map((account) => account.name);
   const balance = accounts.map((account) => account.currentBalance);
 

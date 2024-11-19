@@ -1,8 +1,8 @@
-import { AuthFormSchema, HTMLInputTypes } from '@/lib/utils';
-import { Control, FieldPath } from 'react-hook-form';
-import { z } from 'zod';
-import { FormControl, FormField, FormLabel, FormMessage } from '../ui/form';
-import { Input } from '../ui/input';
+import {AuthFormSchema, HTMLInputTypes} from '@/lib/utils';
+import {Control, FieldPath} from 'react-hook-form';
+import {z} from 'zod';
+import {FormControl, FormField, FormLabel, FormMessage} from '../ui/form';
+import {Input} from '../ui/input';
 // to use all the fields in the form
 const formSchema = AuthFormSchema('sign-up');
 export interface CustomInputProps {
@@ -49,10 +49,10 @@ const CustomInput = ({
     <FormField
       control={control}
       name={name}
-      render={({ field }) => (
-        <div className='form-item'>
-          <FormLabel className='form-label'>{label}</FormLabel>
-          <div className='flex flex-col w-full'>
+      render={({field}) => (
+        <div className="form-item">
+          <FormLabel className="form-label">{label}</FormLabel>
+          <div className="flex flex-col w-full">
             <FormControl>
               <Input
                 // type={name === 'password' ? 'password' : 'text'}
@@ -60,12 +60,12 @@ const CustomInput = ({
                 id={field.name}
                 placeholder={placeholder}
                 {...field}
-                className='input-class'
+                className="input-class"
                 {...dateAttributes} // Conditionally spreads min and max only if inputType is "date"
                 required
               />
             </FormControl>
-            <FormMessage className='form-message mt-2' />
+            <FormMessage className="form-message mt-2" />
           </div>
         </div>
       )}

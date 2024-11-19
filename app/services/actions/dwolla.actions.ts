@@ -1,6 +1,6 @@
 'use server';
 
-import { Client } from 'dwolla-v2';
+import {Client} from 'dwolla-v2';
 
 const getEnvironment = (): 'production' | 'sandbox' => {
   const environment = process.env.DWOLLA_ENV as string;
@@ -12,7 +12,7 @@ const getEnvironment = (): 'production' | 'sandbox' => {
       return 'production';
     default:
       throw new Error(
-        'Dwolla environment should either be set to `sandbox` or `production`',
+        'Dwolla environment should either be set to `sandbox` or `production`'
       );
   }
 };
@@ -25,7 +25,7 @@ const dwollaClient = new Client({
 
 // Create a Dwolla Funding Source using a Plaid Processor Token
 export const createFundingSource = async (
-  options: CreateFundingSourceOptions,
+  options: CreateFundingSourceOptions
 ) => {
   try {
     return await dwollaClient
@@ -42,7 +42,7 @@ export const createFundingSource = async (
 export const createOnDemandAuthorization = async () => {
   try {
     const onDemandAuthorization = await dwollaClient.post(
-      'on-demand-authorizations',
+      'on-demand-authorizations'
     );
     const authLink = onDemandAuthorization.body._links;
     return authLink;
@@ -52,7 +52,7 @@ export const createOnDemandAuthorization = async () => {
 };
 
 export const createDwollaCustomer = async (
-  newCustomer: NewDwollaCustomerParams,
+  newCustomer: NewDwollaCustomerParams
 ) => {
   try {
     return await dwollaClient
@@ -63,6 +63,16 @@ export const createDwollaCustomer = async (
   }
 };
 
+/**
+ * Create a Dwolla transfer
+ *
+ * @param {TransferParams} params - Object with properties:
+ * @param {string} params.sourceFundingSourceUrl - The URL of the Dwolla funding source to deduct from.
+ * @param {string} params.destinationFundingSourceUrl - The URL of the Dwolla funding source to credit.
+ * @param {string} params.amount - The amount to transfer in USD, formatted with two decimal places.
+ *
+ * @returns {Promise<string>} - The URL of the created Dwolla transfer, or undefined if the operation failed.
+ */
 export const createTransfer = async ({
   sourceFundingSourceUrl,
   destinationFundingSourceUrl,

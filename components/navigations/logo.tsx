@@ -18,14 +18,14 @@ const Logo = ({
 }: LogoProps) => {
   return (
     <Link
-      href='/'
+      href="/"
       className={` cursor-pointer flex items-center gap-2 ${styleLink}${
         isCenter ? ' justify-center' : ''
       }`}
     >
       <Image
-        src='/icons/logo.svg'
-        alt='Horizon logo'
+        src="/icons/logo.svg"
+        alt="Horizon logo"
         width={imageSize}
         height={imageSize}
         className={styleImage}

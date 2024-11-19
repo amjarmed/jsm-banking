@@ -5,42 +5,42 @@ import {
   SheetContent,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { sidebarLinks } from '@/constants';
-import { cn } from '@/lib/utils';
-import { Menu } from 'lucide-react';
+import {sidebarLinks} from '@/constants';
+import {cn} from '@/lib/utils';
+import {Menu} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import {usePathname} from 'next/navigation';
 import Logo from './logo';
 import SideBarFooter from './sideBarFooter';
-const MobileNavBar = ({ user }: MobileNavProps) => {
+const MobileNavBar = ({user}: MobileNavProps) => {
   const pathname = usePathname();
 
   return (
-    <section className='mobile-sidebar root-layout  '>
+    <section className="mobile-sidebar root-layout  ">
       {/* main logo */}
-      <Logo imageSize={30} styleImage='mb-0' />
+      <Logo imageSize={30} styleImage="mb-0" />
 
-      <div className='mobile-links'>
+      <div className="mobile-links">
         {/* side bar links */}
         <Sheet>
           <SheetTrigger>
-            <Menu className='cursor-pointer' size={30} />
+            <Menu className="cursor-pointer" size={30} />
           </SheetTrigger>
-          <SheetContent side='left' className='bg-white border-none '>
-            <div className='flex flex-col items-start w-full gap-4'>
+          <SheetContent side="left" className="bg-white border-none ">
+            <div className="flex flex-col items-start w-full gap-4">
               {/* main logo */}
               <Logo
                 imageSize={30}
-                styleImage='mb-0'
-                styleLink='cursor-pointer flex items-center gap-1 px-4 '
+                styleImage="mb-0"
+                styleLink="cursor-pointer flex items-center gap-1 px-4 "
                 isTitle={false}
-                styleTitle='text-26 font-imb-plex-serif font-bold text-black-1'
+                styleTitle="text-26 font-imb-plex-serif font-bold text-black-1"
               />
               {/* Personalion */}
-              <div className='mobilenav-sheet '>
+              <div className="mobilenav-sheet ">
                 <SheetClose asChild>
-                  <nav className='flex flex-col items-start w-full h-full gap-y-4 text-white '>
+                  <nav className="flex flex-col items-start w-full h-full gap-y-4 text-white ">
                     {sidebarLinks.map((link) => {
                       const isActive =
                         pathname === link.route ||
@@ -67,7 +67,7 @@ const MobileNavBar = ({ user }: MobileNavProps) => {
                                 'text-16 font-semibold text-black-2 ',
                                 {
                                   '!text-white': isActive,
-                                },
+                                }
                               )}
                             >
                               {link.label}
@@ -81,7 +81,7 @@ const MobileNavBar = ({ user }: MobileNavProps) => {
                   </nav>
                 </SheetClose>
                 {/* TODO:FOOTER */}
-                <SideBarFooter user={user} type='mobile' />
+                <SideBarFooter user={user} type="mobile" />
               </div>
             </div>
           </SheetContent>

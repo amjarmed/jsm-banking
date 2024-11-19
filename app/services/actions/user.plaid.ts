@@ -1,24 +1,22 @@
 'use server';
-import { createAdminClient } from '@/app/api/appwriter';
-import { plaidClient } from '@/app/api/plaid';
-import { encryptId, parseStringify } from '@/lib/utils';
-import { revalidatePath } from 'next/cache';
-import { ID, Query } from 'node-appwrite';
+import {createAdminClient} from '@/app/api/appwriter';
+import {plaidClient} from '@/app/api/plaid';
+import {encryptId, parseStringify} from '@/lib/utils';
+import {revalidatePath} from 'next/cache';
+import {ID, Query} from 'node-appwrite';
 import {
   CountryCode,
   ProcessorTokenCreateRequest,
   ProcessorTokenCreateRequestProcessorEnum,
   Products,
 } from 'plaid';
-import { addFundingSource } from './dwolla.actions';
+import {addFundingSource} from './dwolla.actions';
 const {
   APPWRITER_DATABASE_ID: DATABASE_ID,
   APPWRITE_USER_COLLECTION_ID: USER_COLLECTION_ID,
   APPWRITE_BANK_COLLECTION_ID: BANK_COLLECTION_ID,
 } = process.env;
 export const createLinkToken = async (user: User) => {
-  console.log('Creating Link Token');
-
   try {
     // Create a link token PARAMS
 
@@ -32,7 +30,7 @@ export const createLinkToken = async (user: User) => {
       },
     };
     const response = await plaidClient.linkTokenCreate(tokenParams);
-    return parseStringify({ linkToken: response.data.link_token });
+    return parseStringify({linkToken: response.data.link_token});
   } catch (error) {
     console.error('Error creating link token:', error);
     return null;
@@ -49,7 +47,6 @@ export const exchangePublicToken = async ({
     const response = await plaidClient.itemPublicTokenExchange({
       public_token: publicToken,
     });
-    console.log(response);
     const accessToken = response.data.access_token;
     const itemId = response.data.item_id;
 
@@ -109,7 +106,7 @@ export const createBankAccount = async ({
   sharableId,
 }: createBankAccountProps) => {
   try {
-    const { database } = await createAdminClient();
+    const {database} = await createAdminClient();
 
     const bankAccount = await database.createDocument(
       DATABASE_ID!,
@@ -122,7 +119,7 @@ export const createBankAccount = async ({
         accessToken,
         fundingSourceUrl,
         sharableId,
-      },
+      }
     );
 
     return parseStringify(bankAccount);
@@ -131,19 +128,16 @@ export const createBankAccount = async ({
   }
 };
 
-export const getBanks = async ({ userId }: getBanksProps) => {
+export const getBanks = async ({userId}: getBanksProps) => {
   try {
-    const { database } = await createAdminClient();
+    const {database} = await createAdminClient();
 
     const banks = await database.listDocuments(
       DATABASE_ID!,
       BANK_COLLECTION_ID!,
-      [Query.equal('userId', [userId])],
+      [Query.equal('userId', [userId])]
     );
 
-    if (banks.total === 0) {
-      console.log('User has 0 Banks');
-    }
     // for debug
 
     return parseStringify(banks.documents);
@@ -152,16 +146,15 @@ export const getBanks = async ({ userId }: getBanksProps) => {
   }
 };
 
-export const getBank = async ({ documentId }: getBankProps) => {
+export const getBank = async ({documentId}: getBankProps) => {
   try {
-    const { database } = await createAdminClient();
+    const {database} = await createAdminClient();
 
     const bank = await database.listDocuments(
       DATABASE_ID!,
       BANK_COLLECTION_ID!,
-      [Query.equal('$id', [documentId])],
+      [Query.equal('$id', [documentId])]
     );
-
 
     return parseStringify(bank.documents[0]);
   } catch (error) {
@@ -169,22 +162,27 @@ export const getBank = async ({ documentId }: getBankProps) => {
   }
 };
 
+/**
+ * Retrieves a bank account from the database by account ID.
+ * @param {getBankByAccountIdProps} props - The properties for retrieving a bank account by account ID.
+ * @returns {Promise<Bank | null>} - A promise that resolves to a Bank object if found, otherwise null.
+ */
 export const getBankByAccountId = async ({
   accountId,
 }: getBankByAccountIdProps) => {
   try {
-    const { database } = await createAdminClient();
+    const {database} = await createAdminClient();
 
     const bank = await database.listDocuments(
       DATABASE_ID!,
       BANK_COLLECTION_ID!,
-      [Query.equal('accountId', [accountId])],
+      [Query.equal('accountId', [accountId])]
     );
 
     if (bank.total !== 1) return null;
 
     return parseStringify(bank.documents[0]);
   } catch (error) {
-    console.log(error);
+    console.log('Get Bank By Account Id Failed:', error);
   }
 };

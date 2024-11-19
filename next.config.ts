@@ -1,5 +1,5 @@
-import { withSentryConfig, type SentryBuildOptions } from '@sentry/nextjs';
-import type { NextConfig } from 'next';
+import {withSentryConfig, type SentryBuildOptions} from '@sentry/nextjs';
+import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   images: {
@@ -33,7 +33,7 @@ const nextConfig: NextConfig = {
       ],
     },
   },
-  webpack(config, { isServer }: { isServer: boolean }) {
+  webpack(config, {isServer}: {isServer: boolean}) {
     if (process.env.NODE_ENV === 'development' && !isServer) {
       // Enable source maps only in development mode for client-side
       config.devtool = 'source-map';
@@ -41,7 +41,6 @@ const nextConfig: NextConfig = {
     return config;
   },
 };
-
 
 // Sentry configuration
 const sentryConfig: SentryBuildOptions = {
@@ -56,9 +55,6 @@ const sentryConfig: SentryBuildOptions = {
 
 // Combine Next.js config with Sentry
 const config = withSentryConfig(nextConfig, sentryConfig);
-
-
-
 
 // Export the final configuration
 export default config;

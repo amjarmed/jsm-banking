@@ -1,16 +1,16 @@
 'use client';
-import { signIn, signUp } from '@/app/services/actions/user.auth';
-import { Button } from '@/components/ui/button';
-import { Form } from '@/components/ui/form';
-import { useToast } from '@/hooks/use-toast';
-import { AuthFormSchema } from '@/lib/utils';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2 } from 'lucide-react';
+import {signIn, signUp} from '@/app/services/actions/user.auth';
+import {Button} from '@/components/ui/button';
+import {Form} from '@/components/ui/form';
+import {useToast} from '@/hooks/use-toast';
+import {AuthFormSchema} from '@/lib/utils';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {Loader2} from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import {useRouter} from 'next/navigation';
+import {useEffect, useState} from 'react';
+import {useForm} from 'react-hook-form';
+import {z} from 'zod';
 import PlaidLink from '../banks/plaid-link';
 import Logo from '../navigations/logo';
 import CustomInput from './customInput';
@@ -37,10 +37,10 @@ import CustomInput from './customInput';
  * and `useForm` from react-hook-form for form handling and validation.
  */
 
-const AuthForm = ({ type }: { type: string }) => {
+const AuthForm = ({type}: {type: string}) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
+  const {toast} = useToast();
   const [loggedInUser, setLoggedInUser] = useState(null);
   const formSchema = AuthFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -89,7 +89,7 @@ const AuthForm = ({ type }: { type: string }) => {
         if (response) router.push('/');
       }
     } catch (error) {
-      console.log('AuthForm error: ', { error });
+      console.log('AuthForm error: ', {error});
     } finally {
       setIsLoading(false);
     }

@@ -1,8 +1,8 @@
-import { signOut } from '@/app/services/actions/user.auth';
-import { LogOutIcon } from 'lucide-react';
-import { redirect } from 'next/navigation';
+import {signOut} from '@/app/services/actions/user.auth';
+import {LogOutIcon} from 'lucide-react';
+import {redirect} from 'next/navigation';
 
-const SideBarFooter = ({ user, type = 'desktop' }: FooterProps) => {
+const SideBarFooter = ({user, type = 'desktop'}: FooterProps) => {
   const handleLogout = async () => {
     const loggedOut = await signOut();
 

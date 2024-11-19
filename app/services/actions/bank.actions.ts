@@ -8,16 +8,16 @@ import {
   TransferNetwork,
   TransferType,
 } from 'plaid';
-import { getBank, getBanks } from './user.plaid';
-import { plaidClient } from '@/app/api/plaid';
-import { parseStringify } from '@/lib/utils';
-import { getTransactionsByBankId } from './transaction.actions';
+import {getBank, getBanks} from './user.plaid';
+import {plaidClient} from '@/app/api/plaid';
+import {parseStringify} from '@/lib/utils';
+import {getTransactionsByBankId} from './transaction.actions';
 
 // Get multiple bank accounts
-export const getAccounts = async ({ userId }: getAccountsProps) => {
+export const getAccounts = async ({userId}: getAccountsProps) => {
   try {
     // get banks from db
-    const banks = await getBanks({ userId });
+    const banks = await getBanks({userId});
     const accounts = await Promise.all(
       banks?.map(async (bank: Bank) => {
         // get each account info from plaid
@@ -46,7 +46,7 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
         };
 
         return account;
-      }),
+      })
     );
 
     const totalBanks = accounts.length;
@@ -54,33 +54,30 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
       return total + account.currentBalance;
     }, 0);
 
-    return parseStringify({ data: accounts, totalBanks, totalCurrentBalance });
+    return parseStringify({data: accounts, totalBanks, totalCurrentBalance});
   } catch (error) {
     console.error('An error occurred while getting the accounts:', error);
   }
 };
 
 // Get one bank account
-export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
-  
+export const getAccount = async ({appwriteItemId}: getAccountProps) => {
   try {
     // get bank from db
-    const bank = await getBank({ documentId: appwriteItemId });
+    const bank = await getBank({documentId: appwriteItemId});
 
     // get account info from plaid
     const accountsResponse = await plaidClient.accountsGet({
       access_token: bank.accessToken,
     });
-  
+
     const accountData = accountsResponse.data.accounts[0];
 
     // get transfer transactions from appwrite
     const transferTransactionsData = await getTransactionsByBankId({
       bankId: bank.$id,
     });
-        console.log('transferTransactionsData:', transferTransactionsData);
-        
-     
+
     const transferTransactions = transferTransactionsData.documents.map(
       (transferData: Transaction) => ({
         id: transferData.$id,
@@ -90,7 +87,7 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
         paymentChannel: transferData.channel,
         category: transferData.category,
         type: transferData.senderBankId === bank.$id ? 'debit' : 'credit',
-      }),
+      })
     );
 
     // get institution info from plaid
@@ -117,7 +114,7 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
 
     // sort transactions by date such that the most recent transaction is first
     const allTransactions = [...transactions, ...transferTransactions].sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     );
 
     return parseStringify({
@@ -130,9 +127,7 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
 };
 
 // Get bank info
-export const getInstitution = async ({
-  institutionId,
-}: getInstitutionProps) => {
+export const getInstitution = async ({institutionId}: getInstitutionProps) => {
   try {
     const institutionResponse = await plaidClient.institutionsGetById({
       institution_id: institutionId,
@@ -148,9 +143,7 @@ export const getInstitution = async ({
 };
 
 // Get transactions
-export const getTransactions = async ({
-  accessToken,
-}: getTransactionsProps) => {
+export const getTransactions = async ({accessToken}: getTransactionsProps) => {
   let hasMore = true;
   let transactions: any = [];
 

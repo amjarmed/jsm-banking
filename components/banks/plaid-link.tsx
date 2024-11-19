@@ -3,16 +3,16 @@ import {
   exchangePublicToken,
 } from '@/app/services/actions/user.plaid';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { Suspense, useCallback, useEffect, useState } from 'react';
+import {useRouter} from 'next/navigation';
+import {Suspense, useCallback, useEffect, useState} from 'react';
 import {
   PlaidLinkOnSuccess,
   PlaidLinkOptions,
   usePlaidLink,
 } from 'react-plaid-link';
-import { Button } from '../ui/button';
+import {Button} from '../ui/button';
 
-const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
+const PlaidLink = ({user, variant}: PlaidLinkProps) => {
   const router = useRouter();
   const [token, setToken] = useState('');
 
@@ -33,12 +33,12 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
       });
       router.push('/');
     },
-    [user],
+    [user]
   );
 
-  const config: PlaidLinkOptions = { token, onSuccess };
+  const config: PlaidLinkOptions = {token, onSuccess};
 
-  const { open, ready } = usePlaidLink(config);
+  const {open, ready} = usePlaidLink(config);
 
   return (
     <>
@@ -75,7 +75,7 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
               width={24}
               height={24}
             />
-            <p className="text-[16px] font-semibold text-black-2" >
+            <p className="text-[16px] font-semibold text-black-2">
               Connect bank
             </p>
           </Button>

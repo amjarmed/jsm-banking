@@ -1,7 +1,14 @@
 {
   // Editor
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.detectIndentation": false,
+  "editor.detectIndentation": true,
+
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.addMissingImports": "always"
+  },
+
+  // Search Exclusions
   "search.exclude": {
     "package-lock.json": true,
     "yarn.lock": true,
@@ -16,101 +23,15 @@
     "**/.next/**": true,
     ".vscode": true,
     "**/.vscode/**": true
-
   },
-  // Prettier settings for frontend
-  "prettier.singleQuote": true,
-  "prettier.trailingComma": "es5",
-  "prettier.printWidth": 80,
-  "prettier.semi": false,
-  "prettier.tabWidth": 2,
 
-  // Tailwind CSS Support
-  "tailwindCSS.includeLanguages": {
-    "plaintext": "html",
-    "javascript": "javascript",
-    "javascriptreact": "javascriptreact",
-    "typescript": "typescript",
-    "typescriptreact": "typescriptreact",
-    "html": "html",
-    "css": "css"
-  },
-  "tailwindCSS.experimental.classRegex": [
-    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
-    ["classnames\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html"
   ],
-
-  // TypeScript
-  "typescript.preferences.importModuleSpecifier": "relative",
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "typescript.validate.enable": true,
-
-
-  // Formatting for TypeScript/JSX/HTML files
-  // TypeScript
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.preferences.autoImportFileExcludePatterns": [
-    // useRouter should be imported from `next/navigation` instead of `next/router`
-    "next/router.d.ts",
-    "next/dist/client/router.d.ts",
-    // give priority for Link to next/link instead of lucide-react
-    "lucide-react"
-  ],
-  "typescript.preferences.preferTypeOnlyAutoImports": true, // Prefer type-only imports
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-
-  // JSX and React-specific settings
-  "react.sortAttributes": "asc",
-  "react.jsdoc": "true",
-
-  // Vitest
-  "testing.openTesting": "neverOpen", // Don't open the testing view automatically when running tests
-
-  // I18n
-  "i18n-ally.localesPaths": ["src/locales"],
-  "i18n-ally.keystyle": "nested",
-
-  // Disable the default formatter, use ESLint instead
-  "prettier.enable": false,
-  "editor.formatOnSave": false,
-
-  // Auto fix with ESLint on save
-  "editor.codeActionsOnSave": [
-    "source.addMissingImports",
-    "source.fixAll.eslint"
-  ],
-    // Enable eslint for all supported languages
-    "eslint.format.enable": true,
-    "eslint.validate": [
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
-      "vue",
-      "html",
-      "markdown",
-
-      "jsonc",
-      "yaml",
-      "toml",
-      "xml",
-      "gql",
-      "graphql",
-      "astro",
-      "css",
-      "less",
-      "scss",
-      "pcss",
-      "postcss",
-      "github-actions-workflow"
-    ]
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifier": "non-relative"
 }

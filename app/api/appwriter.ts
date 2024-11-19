@@ -1,7 +1,7 @@
 'use server';
 // import { Databases } from 'appwrite';
-import { cookies } from 'next/headers';
-import { Account, Client, Databases, Users } from 'node-appwrite';
+import {cookies} from 'next/headers';
+import {Account, Client, Databases, Users} from 'node-appwrite';
 
 const {
   NEXT_PUBLIC_APPWRITE_ENDPOINT: APPWRITE_ENDPOINT,
