@@ -6,6 +6,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import Image from 'next/image';
+import {transactionCategoryStyles} from '../../constants';
 import {
   cn,
   formatAmount,
@@ -13,8 +15,6 @@ import {
   getTransactionStatus,
   removeSpecialCharacters,
 } from '../../lib/utils';
-import {transactionCategoryStyles} from '../../constants';
-
 function TransactionsTable({transactions}: TransactionTableProps) {
   const CategoryBadge = ({category}: CategoryBadgeProps) => {
     const {borderColor, backgroundColor, textColor, chipBackgroundColor} =
@@ -23,12 +23,9 @@ function TransactionsTable({transactions}: TransactionTableProps) {
       ] || transactionCategoryStyles.default;
 
     return (
-      <div className={cn('category-badge ', borderColor, chipBackgroundColor)}>
-        <div className={cn('size-3 rounded-full ', backgroundColor)}>
-          <p className={cn('text-[12px] font-medium ', textColor)}>
-            {category}
-          </p>
-        </div>
+      <div className={cn('category-badge', borderColor, chipBackgroundColor)}>
+        <div className={cn('size-2 rounded-full', backgroundColor)} />
+        <p className={cn('text-[12px] font-medium', textColor)}>{category}</p>
       </div>
     );
   };
@@ -41,6 +38,7 @@ function TransactionsTable({transactions}: TransactionTableProps) {
           <TableHead className="px-2">Amount</TableHead>
           <TableHead className="px-2">Status</TableHead>
           <TableHead className="px-2 max-md:hidden">Date</TableHead>
+          <TableHead className="px-2 max-md:hidden">Channel</TableHead>
           <TableHead className="px-2 max-md:hidden">Category</TableHead>
         </TableRow>
       </TableHeader>
@@ -62,6 +60,17 @@ function TransactionsTable({transactions}: TransactionTableProps) {
             >
               <TableCell className="max-w-[250px] pl-2 pr-10">
                 <div className="flex items-center gap-3">
+                  {t.image != null ? (
+                    <Image
+                      src={t.image}
+                      alt={t.name}
+                      width={24}
+                      height={24}
+                      className="rounded-full"
+                    />
+                  ) : (
+                    <div className="w-6 h-6 rounded-full border bg-[#e5e7eb] "></div>
+                  )}
                   <h1 className="text-14 truncate font-semibold text-[#344054]">
                     {removeSpecialCharacters(t.name)}
                   </h1>
@@ -72,15 +81,19 @@ function TransactionsTable({transactions}: TransactionTableProps) {
               >
                 {isDebit ? `-${amount}` : isCredit ? amount : amount}
               </TableCell>
+
               <TableCell className="pl-2 pr-10">
                 <CategoryBadge category={status} />
               </TableCell>
+
               <TableCell className="pl-2 pr-10 min-w-32">
                 {formatDateTime(new Date(t.date)).dateTime}
               </TableCell>
+
               <TableCell className="pl-2 pr-10 capitalize min-w-24">
                 {t.paymentChannel}
               </TableCell>
+
               <TableCell className="pl-2 pr-10 max-md:hidden">
                 <CategoryBadge category={t.category} />
               </TableCell>

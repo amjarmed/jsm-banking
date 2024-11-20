@@ -1,10 +1,9 @@
+import {getAccount, getAccounts} from '@/app/services/actions/bank.actions';
+import {getLoggedInUser} from '@/app/services/actions/user.auth';
+import RecentTransactions from '@/components/banks/recentTransactions';
 import HeaderBox from '@/components/headerBox';
 import RightSideBar from '@/components/navigations/rightSideBar';
 import TotalBalanceBox from '@/components/totalBalanceBox';
-import {redirect} from 'next/navigation';
-import {getLoggedInUser} from '../services/actions/user.auth';
-import {getAccount, getAccounts} from '../services/actions/bank.actions';
-import RecentTransactions from '@/components/banks/recentTransactions';
 
 export default async function Home(props: SearchParamProps) {
   const searchParams = await props.searchParams;
@@ -23,7 +22,10 @@ export default async function Home(props: SearchParamProps) {
   const accountsData = accounts?.data;
 
   const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
+
   const account = await getAccount({appwriteItemId});
+
+  console.log(account?.transactions);
 
   return (
     <section id="home" className="home ">

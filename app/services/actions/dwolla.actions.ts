@@ -97,7 +97,11 @@ export const createTransfer = async ({
       .post('transfers', requestBody)
       .then((res) => res.headers.get('location'));
   } catch (err) {
-    console.error('Transfer fund failed: ', err);
+    if (err instanceof Error) {
+      console.error('Creating a Dwolla Transfer Failed: ', err.message);
+    } else {
+      console.error('Creating a Dwolla Transfer Failed: ', err);
+    }
   }
 };
 
@@ -119,6 +123,6 @@ export const addFundingSource = async ({
     };
     return await createFundingSource(fundingSourceOptions);
   } catch (err) {
-    console.error('Transfer fund failed: ', err);
+    console.error('add Funding Source failed: ', err);
   }
 };

@@ -1,6 +1,6 @@
+import BankCard from '@/components/banks/bankCard';
 import {Plus} from 'lucide-react';
 import Link from 'next/link';
-import BankCard from '../banks/bankCard';
 
 const RightSideBar = ({user, transactions, banks}: RightSidebarProps) => {
   return (

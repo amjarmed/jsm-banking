@@ -1,23 +1,20 @@
 'use server';
 
-import {
-  ACHClass,
-  CountryCode,
-  TransferAuthorizationCreateRequest,
-  TransferCreateRequest,
-  TransferNetwork,
-  TransferType,
-} from 'plaid';
-import {getBank, getBanks} from './user.plaid';
 import {plaidClient} from '@/app/api/plaid';
+import {getTransactionsByBankId} from '@/app/services/actions/transaction.actions';
+import {getBank, getBanks} from '@/app/services/actions/user.plaid';
+import Logger from '@/lib/logger';
 import {parseStringify} from '@/lib/utils';
-import {getTransactionsByBankId} from './transaction.actions';
+import {CountryCode} from 'plaid';
+
+const logger = new Logger('bank.log');
 
 // Get multiple bank accounts
 export const getAccounts = async ({userId}: getAccountsProps) => {
   try {
     // get banks from db
     const banks = await getBanks({userId});
+
     const accounts = await Promise.all(
       banks?.map(async (bank: Bank) => {
         // get each account info from plaid
@@ -70,7 +67,6 @@ export const getAccount = async ({appwriteItemId}: getAccountProps) => {
     const accountsResponse = await plaidClient.accountsGet({
       access_token: bank.accessToken,
     });
-
     const accountData = accountsResponse.data.accounts[0];
 
     // get transfer transactions from appwrite
@@ -155,7 +151,11 @@ export const getTransactions = async ({accessToken}: getTransactionsProps) => {
       });
 
       const data = response.data;
-
+      logger.log(
+        parseStringify({
+          data: response?.data,
+        })
+      );
       transactions = response.data.added.map((transaction) => ({
         id: transaction.transaction_id,
         name: transaction.name,
@@ -172,8 +172,11 @@ export const getTransactions = async ({accessToken}: getTransactionsProps) => {
       hasMore = data.has_more;
     }
 
+    if (transactions.length === 0) {
+      return parseStringify([]);
+    }
     return parseStringify(transactions);
   } catch (error) {
-    console.error('An error occurred while getting the accounts:', error);
+    console.error('An error occurred while getting the transactions:', error);
   }
 };

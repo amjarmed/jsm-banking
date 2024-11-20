@@ -1,27 +1,39 @@
-// // logger.ts
-// import winston from 'winston';
+import fs from 'fs';
+import path from 'path';
 
-// // Create a custom logger
-// const logger = winston.createLogger({
-//   level: 'info',
-//   format: winston.format.combine(
-//     winston.format.timestamp(),
-//     winston.format.json(), // Logs will be in JSON format
-//   ),
-//   transports: [
-//     new winston.transports.Console(), // Log to console
-//     new winston.transports.File({ filename: 'logs/error.log', level: 'error' }), // Log errors to a file
-//     new winston.transports.File({ filename: 'logs/combined.log' }), // Log all messages to a file
-//   ],
-// });
+class Logger {
+  private logFilePath: string;
 
-// // If you're not in production, log to the `console` with the format:
-// if (process.env.NODE_ENV !== 'production') {
-//   logger.add(
-//     new winston.transports.Console({
-//       format: winston.format.simple(),
-//     }),
-//   );
-// }
+  constructor(logFileName: string = 'app.log', logDir: string = 'logs') {
+    this.logFilePath = path.join(logDir, logFileName);
+    if (!fs.existsSync(logDir)) {
+      fs.mkdirSync(logDir, {recursive: true});
+    }
+  }
 
-// export default logger;
+  /**
+   * Writes a log message to the file with a timestamp.
+   * Automatically stringifies objects for better readability.
+   * @param message - The log message to write (string or object).
+   */
+  public log(message: string | object): void {
+    const timestamp = new Date().toISOString();
+    const logEntry = `[${timestamp}] ${
+      typeof message === 'object' ? JSON.stringify(message, null, 2) : message
+    }\n`;
+
+    fs.appendFile(this.logFilePath, logEntry, (err) => {
+      if (err) {
+        console.error('Failed to write log:', err);
+      }
+    });
+  }
+}
+
+export default Logger;
+
+// Example usage
+const logger = new Logger();
+logger.log('This is a string log message.');
+logger.log({action: 'LOGIN', status: 'SUCCESS', userId: 123});
+logger.log(['Item1', 'Item2', 'Item3']);

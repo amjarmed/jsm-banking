@@ -4,7 +4,6 @@ import Image from 'next/image';
 import {useRouter, useSearchParams} from 'next/navigation';
 import {useState} from 'react';
 
-import {formUrlQuery, formatAmount} from '@/lib/utils';
 import {
   Select,
   SelectContent,
@@ -12,12 +11,14 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-} from '@radix-ui/react-select';
+} from '@/components/ui/select';
+import {formUrlQuery, formatAmount} from '@/lib/utils';
 
 export const BankDropdown = ({
   accounts = [],
   setValue,
   otherStyles,
+  field,
 }: BankDropdownProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -42,10 +43,8 @@ export const BankDropdown = ({
   return (
     <Select
       defaultValue={selected.id}
-      onValueChange={(value) => {
-        console.log('value:', value);
-
-        handleBankChange(value);
+      onValueChange={(field) => {
+        handleBankChange(field);
       }}
     >
       <SelectTrigger

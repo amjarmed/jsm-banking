@@ -1,7 +1,7 @@
 import TransactionsTable from '../../../components/banks/transactionsTable';
 import HeaderBox from '../../../components/headerBox';
 import {formatAmount} from '../../../lib/utils';
-import {getAccounts, getAccount} from '../../services/actions/bank.actions';
+import {getAccount, getAccounts} from '../../services/actions/bank.actions';
 import {getLoggedInUser} from '../../services/actions/user.auth';
 
 const TransactionHistory = async (props: SearchParamProps) => {
@@ -21,10 +21,8 @@ const TransactionHistory = async (props: SearchParamProps) => {
   const accountsData = accounts?.data;
 
   const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
-  const account = await getAccount({appwriteItemId});
-  console.log('account: ');
 
-  console.log(account);
+  const account = await getAccount({appwriteItemId});
 
   return (
     <div className="transactions">

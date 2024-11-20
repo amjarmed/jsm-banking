@@ -49,6 +49,11 @@ const PaymentTransferForm = ({accounts}: PaymentTransferFormProps) => {
     },
   });
 
+  /**
+   * Submit the payment transfer form.
+   * @param {z.infer<typeof formSchema>} data - The form data.
+   * @returns {Promise<void>} - A promise that resolves when the request is finished.
+   */
   const submit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true);
 
@@ -64,6 +69,8 @@ const PaymentTransferForm = ({accounts}: PaymentTransferFormProps) => {
         destinationFundingSourceUrl: receiverBank.fundingSourceUrl,
         amount: data.amount,
       };
+      console.log(transferParams);
+
       // create transfer
       const transfer = await createTransfer(transferParams);
 
@@ -99,7 +106,7 @@ const PaymentTransferForm = ({accounts}: PaymentTransferFormProps) => {
         <FormField
           control={form.control}
           name="senderBank"
-          render={(field) => (
+          render={() => (
             <FormItem className="border-t border-gray-200">
               <div className="payment-transfer_form-item pb-6 pt-5">
                 <div className="payment-transfer_form-content">
@@ -116,7 +123,6 @@ const PaymentTransferForm = ({accounts}: PaymentTransferFormProps) => {
                       accounts={accounts}
                       setValue={form.setValue}
                       otherStyles="!w-full"
-                      field={field}
                     />
                   </FormControl>
                   <FormMessage className="text-12 text-red-500" />

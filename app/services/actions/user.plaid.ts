@@ -19,10 +19,10 @@ const {
 export const createLinkToken = async (user: User) => {
   try {
     // Create a link token PARAMS
-
     const tokenParams = {
       client_name: `${user.firstName} ${user.lastName}`,
-      products: [Products.Auth],
+      products: [Products.Auth, Products.Transactions],
+
       country_codes: [CountryCode.Us],
       language: 'en',
       user: {
