@@ -57,12 +57,15 @@ const nextConfig: NextConfig = {
 // Sentry configuration
 const sentryConfig: SentryBuildOptions = {
   org: 'porfolio-0a',
-  project: 'javascript-nextjs',
-  silent: !process.env.CI,
+  project: 'horizon-bank',
+  // silent: !process.env.CI,
   widenClientFileUpload: true,
   hideSourceMaps: true,
   disableLogger: true,
   automaticVercelMonitors: true,
+  // An auth token is required for uploading source maps.
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  silent: false, // Can be used to suppress logs
 };
 
 // Combine Next.js config with Sentry
