@@ -4,14 +4,15 @@ import {cn} from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
+import PlaidLink from '../banks/plaid-link';
 import Logo from './logo';
 import SideBarFooter from './sideBarFooter';
-import PlaidLink from '../banks/plaid-link';
 
 function SideBar({user}: SideBarProps) {
   const pathname = usePathname();
   return (
-    <section className="sidebar ">
+    // todo: fix the overflow
+    <section className="sidebar  z-50 ">
       <nav className="flex flex-col gap-4">
         {/* main logo */}
         <Logo styleLink="mb-12" />

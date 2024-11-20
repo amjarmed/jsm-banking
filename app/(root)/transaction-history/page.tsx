@@ -1,5 +1,6 @@
 import {getAccount, getAccounts} from '@/app/services/actions/bank.actions';
 import {getLoggedInUser} from '@/app/services/actions/user.auth';
+import {Pagination} from '@/components/banks/pagination';
 import TransactionsTable from '@/components/banks/transactionsTable';
 import HeaderBox from '@/components/headerBox';
 import {formatAmount} from '@/lib/utils';
@@ -8,7 +9,8 @@ const TransactionHistory = async (props: SearchParamProps) => {
   const searchParams = await props.searchParams;
 
   const {id, page} = searchParams;
-  //const currentPage = Number(page as string) || 1;
+
+  const currentPage = Number(page as string) || 1;
 
   const loggedIn = await getLoggedInUser();
 
@@ -23,6 +25,16 @@ const TransactionHistory = async (props: SearchParamProps) => {
   const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
 
   const account = await getAccount({appwriteItemId});
+
+  const rowsPerPage = 10;
+  const totalPages = Math.ceil(account?.transactions.length / rowsPerPage);
+  const indexOfLastTransaction = page * rowsPerPage;
+  const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
+
+  const currentTransaction = account?.transactions.slice(
+    indexOfFirstTransaction,
+    indexOfLastTransaction
+  );
 
   return (
     <div className="transactions">
@@ -55,7 +67,13 @@ const TransactionHistory = async (props: SearchParamProps) => {
           </div>
         </div>
         <section className="flex w-full flex-col gap-6">
-          <TransactionsTable transactions={account?.transactions || []} />
+          <TransactionsTable transactions={currentTransaction || []} />
+
+          {totalPages > 1 && (
+            <div className="my-4 w-full">
+              <Pagination page={currentPage} totalPages={totalPages} />
+            </div>
+          )}
         </section>
       </div>
     </div>

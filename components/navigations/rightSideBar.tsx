@@ -1,10 +1,13 @@
 import BankCard from '@/components/banks/bankCard';
+import Category from '@/components/banks/Category';
 import {Plus} from 'lucide-react';
 import Link from 'next/link';
+import {countTransactionCategories} from '../../lib/utils';
 
 const RightSideBar = ({user, transactions, banks}: RightSidebarProps) => {
+  const categories: CategoryCount[] = countTransactionCategories(transactions);
   return (
-    <aside className="right-sidebar">
+    <aside className="right-sidebar ">
       {/* profile */}
       <section className="flex flex-col pb-8">
         <div className="profile-banner">
@@ -58,6 +61,14 @@ const RightSideBar = ({user, transactions, banks}: RightSidebarProps) => {
             )}
           </div>
         )}
+        <div className="cat-wrapper mt-10 flex flex-1 flex-col">
+          <h2 className="header-2 space-y-4">Top categories</h2>
+          <div className="space-y-5">
+            {categories.map((cat, index) => (
+              <Category category={cat} key={index} />
+            ))}
+          </div>
+        </div>
       </section>
     </aside>
   );

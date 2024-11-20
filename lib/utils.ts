@@ -205,15 +205,14 @@ export function getAccountTypeColors(type: AccountTypes) {
   }
 }
 
-/*
 export function countTransactionCategories(
-  transactions: Transaction[],
+  transactions: Transaction[]
 ): CategoryCount[] {
-  const categoryCounts: { [category: string]: number } = {};
+  const categoryCounts: {[category: string]: number} = {};
   let totalCount = 0;
 
   // Iterate over each transaction
-  transactions &&
+  if (transactions) {
     transactions.forEach((transaction) => {
       // Extract the category from the transaction
       const category = transaction.category;
@@ -229,6 +228,7 @@ export function countTransactionCategories(
       // Increment total count
       totalCount++;
     });
+  }
 
   // Convert the categoryCounts object to an array of objects
   const aggregatedCategories: CategoryCount[] = Object.keys(categoryCounts).map(
@@ -236,7 +236,7 @@ export function countTransactionCategories(
       name: category,
       count: categoryCounts[category],
       totalCount,
-    }),
+    })
   );
 
   // Sort the aggregatedCategories array by count in descending order
@@ -244,7 +244,6 @@ export function countTransactionCategories(
 
   return aggregatedCategories;
 }
- */
 
 /**
  * Extracts the customer ID from the given URL.

@@ -26,7 +26,7 @@ export default async function Home({
 
   return (
     <section id="home" className="home ">
-      <div className="home-content">
+      <div className="home-content ">
         <header className="home-header">
           {/* welcome message  */}
           <HeaderBox
