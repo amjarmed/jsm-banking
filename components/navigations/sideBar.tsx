@@ -12,7 +12,7 @@ function SideBar({user}: SideBarProps) {
   const pathname = usePathname();
   return (
     // todo: fix the overflow
-    <section className="sidebar  z-50 ">
+    <section className="sidebar  z-50 overflow-hidden ">
       <nav className="flex flex-col gap-4">
         {/* main logo */}
         <Logo styleLink="mb-12" />

@@ -3,11 +3,8 @@
 import {plaidClient} from '@/app/api/plaid';
 import {getTransactionsByBankId} from '@/app/services/actions/transaction.actions';
 import {getBank, getBanks} from '@/app/services/actions/user.plaid';
-import Logger from '@/lib/logger';
 import {parseStringify} from '@/lib/utils';
 import {CountryCode} from 'plaid';
-
-const logger = new Logger('bank.log');
 
 // Get multiple bank accounts
 export const getAccounts = async ({userId}: getAccountsProps) => {
@@ -167,11 +164,6 @@ export const getTransactions = async ({accessToken}: getTransactionsProps) => {
           date: transaction.date || new Date().toISOString(),
           image: transaction.logo_url || '',
         }))
-      );
-      logger.log(
-        parseStringify({
-          transactions: transactions,
-        })
       );
       hasMore = data.has_more;
     }
