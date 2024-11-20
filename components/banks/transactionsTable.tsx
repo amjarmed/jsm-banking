@@ -60,7 +60,7 @@ function TransactionsTable({transactions}: TransactionTableProps) {
             >
               <TableCell className="max-w-[250px] pl-2 pr-10">
                 <div className="flex items-center gap-3">
-                  {t.image != null ? (
+                  {t.image != '' && t.image != null ? (
                     <Image
                       src={t.image}
                       alt={t.name}

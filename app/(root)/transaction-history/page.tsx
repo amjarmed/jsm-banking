@@ -1,14 +1,14 @@
-import TransactionsTable from '../../../components/banks/transactionsTable';
-import HeaderBox from '../../../components/headerBox';
-import {formatAmount} from '../../../lib/utils';
-import {getAccount, getAccounts} from '../../services/actions/bank.actions';
-import {getLoggedInUser} from '../../services/actions/user.auth';
+import {getAccount, getAccounts} from '@/app/services/actions/bank.actions';
+import {getLoggedInUser} from '@/app/services/actions/user.auth';
+import TransactionsTable from '@/components/banks/transactionsTable';
+import HeaderBox from '@/components/headerBox';
+import {formatAmount} from '@/lib/utils';
 
 const TransactionHistory = async (props: SearchParamProps) => {
   const searchParams = await props.searchParams;
 
   const {id, page} = searchParams;
-  const currentPage = Number(page as string) || 1;
+  //const currentPage = Number(page as string) || 1;
 
   const loggedIn = await getLoggedInUser();
 

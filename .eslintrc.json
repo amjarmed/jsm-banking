@@ -8,7 +8,9 @@
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
     "eslint:recommended",
-    "next/typescript"
+    "next/typescript",
+    "next",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

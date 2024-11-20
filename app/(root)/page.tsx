@@ -25,8 +25,6 @@ export default async function Home(props: SearchParamProps) {
 
   const account = await getAccount({appwriteItemId});
 
-  console.log(account?.transactions);
-
   return (
     <section id="home" className="home ">
       <div className="home-content">

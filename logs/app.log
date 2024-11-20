@@ -813,3 +813,256 @@
   "Item2",
   "Item3"
 ]
+[2024-11-20T02:42:19.122Z] This is a string log message.
+[2024-11-20T02:42:19.123Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:42:19.123Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:43:35.861Z] This is a string log message.
+[2024-11-20T02:43:35.862Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:43:35.862Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:45:26.267Z] This is a string log message.
+[2024-11-20T02:45:26.267Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:45:26.267Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:45:31.815Z] This is a string log message.
+[2024-11-20T02:45:31.816Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:45:31.816Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:45:41.198Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:45:41.198Z] This is a string log message.
+[2024-11-20T02:45:41.198Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:48:23.139Z] This is a string log message.
+[2024-11-20T02:48:23.139Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:48:23.140Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:48:39.276Z] This is a string log message.
+[2024-11-20T02:48:39.276Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:48:39.276Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:48:52.320Z] This is a string log message.
+[2024-11-20T02:48:52.320Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:48:52.320Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:48:59.573Z] This is a string log message.
+[2024-11-20T02:48:59.574Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:48:59.574Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:49:10.619Z] This is a string log message.
+[2024-11-20T02:49:10.620Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:49:10.620Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:49:19.904Z] This is a string log message.
+[2024-11-20T02:49:19.905Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:49:19.905Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:49:28.677Z] This is a string log message.
+[2024-11-20T02:49:28.678Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:49:28.678Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:49:53.483Z] This is a string log message.
+[2024-11-20T02:49:53.483Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:49:53.483Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:50:45.139Z] This is a string log message.
+[2024-11-20T02:50:45.140Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:50:45.140Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:51:11.472Z] This is a string log message.
+[2024-11-20T02:51:11.472Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:51:11.472Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:54:46.052Z] This is a string log message.
+[2024-11-20T02:54:46.052Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:54:46.052Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:56:24.298Z] This is a string log message.
+[2024-11-20T02:56:24.298Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:56:24.298Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:57:39.234Z] This is a string log message.
+[2024-11-20T02:57:39.234Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:57:39.235Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:58:10.533Z] This is a string log message.
+[2024-11-20T02:58:10.533Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:58:10.533Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:58:31.412Z] This is a string log message.
+[2024-11-20T02:58:31.412Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:58:31.412Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:58:47.851Z] This is a string log message.
+[2024-11-20T02:58:47.851Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:58:47.851Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:58:59.910Z] This is a string log message.
+[2024-11-20T02:58:59.910Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:58:59.910Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
+[2024-11-20T02:59:19.036Z] This is a string log message.
+[2024-11-20T02:59:19.036Z] {
+  "action": "LOGIN",
+  "status": "SUCCESS",
+  "userId": 123
+}
+[2024-11-20T02:59:19.036Z] [
+  "Item1",
+  "Item2",
+  "Item3"
+]
