@@ -5,10 +5,9 @@ import HeaderBox from '@/components/headerBox';
 import RightSideBar from '@/components/navigations/rightSideBar';
 import TotalBalanceBox from '@/components/totalBalanceBox';
 
-export default async function Home(props: SearchParamProps) {
-  const searchParams = await props.searchParams;
-
-  const {id, page} = searchParams;
+export default async function Home({
+  searchParams: {id, page},
+}: SearchParamProps) {
   const currentPage = Number(page as string) || 1;
 
   const loggedIn = await getLoggedInUser();
