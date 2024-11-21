@@ -25,9 +25,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  experimental: {
-    ppr: 'incremental',
-  },
+
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
@@ -39,6 +37,8 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   serverExternalPackages: ['import-in-the-middle'],
   experimental: {
+    ppr: 'incremental',
+
     turbo: {
       resolveExtensions: [
         '.mdx',
