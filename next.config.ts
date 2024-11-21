@@ -37,7 +37,7 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   serverExternalPackages: ['import-in-the-middle'],
   experimental: {
-    ppr: 'incremental',
+    // ppr: 'incremental', The experimental feature "experimental.ppr" can only be enabled when using the latest canary version of Next.js.
 
     turbo: {
       resolveExtensions: [
