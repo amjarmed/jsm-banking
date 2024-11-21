@@ -1,12 +1,12 @@
-import React from 'react';
+import {Loader} from 'lucide-react';
 
 function Loading() {
   // LAODING PAGE
   return (
     <div className="w-full min-h-screen flex justify-center items-center">
-      <p className="text-2xl animate-pulse font-bold text-blue-500">
-        loading...
-      </p>
+      <h1 className="text-2xl  font-bold text-blue-600">
+        <Loader className="animate-spin size-16" />
+      </h1>
     </div>
   );
 }

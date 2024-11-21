@@ -14,20 +14,34 @@
 
 ## duration time
 
-day-1 :00:21:00 minutes
-day-2 :01:03:00 minutes
-day-3 :02:34:14 minutes
-day-4 : 03:05:55 minutes
-day-5 : 03:16:30 minutes
-day-6 : 03:37:01 minutes | cors problem
-day-7 : 04:10:00 minutes
-day-8 : 04:40:00 minutes | cors => solution was to add "use server"
-day-9 : 04:43:00 minutes
-day-10 : 05:04:00 minutes | => 'Invalid query: Query value is invalid for attribute "$id"', (cause exchange token invalid )
-day-11 : 04:43:00 minutes
-day-12 : 05:37:00 minutes | problem with tailwind (css empty selector !border-b-DEFAULT)
-day-13 : 05:39:00 minutes | problem with plaid (client does not have user consent to access the PRODUCT_TRANSACTIONS product) | 2. i was select the same bank as sender and receiver for transfer found
-day-14 : 06:35:00 | and and deploy to vercel
+- day-1 :00:21:00 minutes
+- day-2 :01:03:00 minutes
+- day-3 :02:34:14 minutes
+- day-4 : 03:05:55 minutes
+- day-5 : 03:16:30 minutes
+- day-6 : 03:37:01 minutes | cors problem
+- day-7 : 04:10:00 minutes
+- day-8 : 04:40:00 minutes | cors => solution was to add "use server"
+- day-9 : 04:43:00 minutes
+- day-10 : 05:04:00 minutes | => 'Invalid query: Query value is invalid for attribute "$id"', (cause exchange token invalid )
+- day-11 : 04:43:00 minutes
+- day-12 : 05:37:00 minutes | problem with tailwind (css empty selector !border-b-DEFAULT)
+- day-13 : 05:39:00 minutes | problem with plaid (client does not have user consent to access the PRODUCT_TRANSACTIONS product) | 2. i was select the same bank as sender and receiver for transfer found
+- day-14 : 06:35:00 | and and deploy to vercel
+
+- **production analyze :** | Page size 1.3 | Load time 398ms| Requests 36
+  | Performance grade 89%
+
+## what I added to this Project and other improvements
+
+- global `error.tsx`
+- global `loading.tsx`
+- global `not-found.tsx`
+- Adding Metadata
+- Progressive Page Rendering (PPR)|
+
+- **production analyze :** | Page size 1.3 | Load time 398ms| Requests 36
+  | Performance grade 89%
 
 ---
 

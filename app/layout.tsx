@@ -13,12 +13,18 @@ const imbPlexSerif = IBM_Plex_Serif({
   variable: '--font-ibm-plex-serif',
 });
 
+//  metadata
+
 export const metadata: Metadata = {
-  title: 'Horizon Bank',
+  title: {
+    default: 'Horizon Bank',
+    template: '%s | Horizon Bank',
+  },
   description: 'Horizon is a modern banking platform for everyone.',
   icons: {
     icon: '/icons/logo.svg',
   },
+  metadataBase: new URL('<https://jsm-banking-sand.vercel.app/>'),
 };
 
 export default function RootLayout({
