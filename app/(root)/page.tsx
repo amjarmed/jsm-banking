@@ -4,6 +4,7 @@ import RecentTransactions from '@/components/banks/recentTransactions';
 import HeaderBox from '@/components/headerBox';
 import RightSideBar from '@/components/navigations/rightSideBar';
 import TotalBalanceBox from '@/components/totalBalanceBox';
+import {Suspense} from 'react';
 
 export default async function Home({
   searchParams: {id, page},
@@ -44,12 +45,14 @@ export default async function Home({
           />
         </header>
         {/* main content : Transactions and Accounts */}
-        <RecentTransactions
-          accounts={accountsData}
-          transactions={account?.transactions}
-          appwriteItemId={appwriteItemId}
-          page={currentPage}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <RecentTransactions
+            accounts={accountsData}
+            transactions={account?.transactions}
+            appwriteItemId={appwriteItemId}
+            page={currentPage}
+          />
+        </Suspense>
       </div>
       {/* right sidebar : Personalization */}
       <RightSideBar

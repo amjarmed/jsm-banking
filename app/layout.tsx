@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   icons: {
     icon: '/icons/logo.svg',
   },
-  metadataBase: new URL('<https://jsm-banking-sand.vercel.app/>'),
+  // metadataBase: new URL('<https://jsm-banking-sand.vercel.app/>'),
 };
 
 export default function RootLayout({
