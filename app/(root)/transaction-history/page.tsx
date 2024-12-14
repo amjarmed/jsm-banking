@@ -6,9 +6,7 @@ import HeaderBox from '@/components/headerBox';
 import {formatAmount} from '@/lib/utils';
 
 const TransactionHistory = async (props: SearchParamProps) => {
-  const searchParams = await props.searchParams;
-
-  const {id, page} = searchParams;
+  const {id, page} = await props.searchParams;
 
   const currentPage = Number(page as string) || 1;
 

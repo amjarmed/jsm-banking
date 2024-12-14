@@ -6,13 +6,12 @@ import RightSideBar from '@/components/navigations/rightSideBar';
 import TotalBalanceBox from '@/components/totalBalanceBox';
 import {Suspense} from 'react';
 
-export default async function Home({
-  searchParams: {id, page},
-}: SearchParamProps) {
+export default async function Home({searchParams}: SearchParamProps) {
+  const {id, page} = await searchParams;
   const currentPage = Number(page as string) || 1;
 
   const loggedIn = await getLoggedInUser();
-
+  if (!loggedIn) return;
   const accounts = await getAccounts({
     userId: loggedIn.$id,
   });
@@ -22,7 +21,9 @@ export default async function Home({
   const accountsData = accounts?.data;
 
   const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
+  console.log({appwriteItemId});
 
+  if (!appwriteItemId) return;
   const account = await getAccount({appwriteItemId});
 
   return (
